@@ -15,12 +15,31 @@
 					</li>
 					<li><a href="news.php">Новости</a></li>
 					<li><a href="#">Дилеры</a></li>
-					<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i>Кабинет</a>
-						<ul>
-							<li><a href="reg.php">Админ панель</a></li>
-							<li><a href="#">Выход</a></li>
-						</ul>
+					<li>
+						<?php if (isset($_SESSION['id'])) : ?>
+							<a href="#">
+								<i class="fa fa-user" aria-hidden="true"></i>
+								<?php echo $_SESSION['username']; ?>
+							</a>
+							<ul>
+								<?php if ($_SESSION['admin']) : ?>
+									<li><a href="#">Админ панель</a></li>
+								<?php endif; ?>
+								<li><a href="#">Выход</a></li>
+							</ul>
 					</li>
+
+				<?php else : ?>
+					<a href="#">
+						<i class="fa fa-user" aria-hidden="true"></i>
+						Вход
+					</a>
+					<ul>
+						<li><a href="reg.php">Регистрация</a></li>
+					</ul>
+				<?php endif; ?>
+
+				</li>
 				</ul>
 			</nav>
 
