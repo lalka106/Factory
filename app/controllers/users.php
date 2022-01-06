@@ -3,8 +3,8 @@ include("app/database/db.php");
 
 $errorMessage = '';
 $status = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//registration
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-reg'])) {
 	$admin = 0;
 	$login = trim($_POST['login']);
 	$email = trim($_POST['email']);
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			$user = selectONE('users', ['id' => $id]);
 
 			$_SESSION['id'] = $user['id'];
-			$_SESSION['username'] = $user['username'];
+			$_SESSION['login'] = $user['username'];
 			$_SESSION['admin'] = $user['admin'];
 
 			if ($_SESSION['admin']) {
@@ -45,6 +45,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	}
 } else {
 	$login = '';
+	$email = '';
+}
+//login
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-log'])) {
+	$email = trim($_POST['email']);
+	$pass = trim($_POST['pass']);
+	if ($email === '' ||  $pass === '') {
+		$errorMessage = 'Не все поля заполненны!';
+	} else {
+		$existence = selectONE('users', ['email' => $email]);
+		if ($existence && password_verify($pass, $existence['password'])) {
+			$_SESSION['id'] = $existence['id'];
+			$_SESSION['login'] = $existence['username'];
+			$_SESSION['admin'] = $existence['admin'];
+
+			if ($_SESSION['admin']) {
+				header('location :' . BASE_URL . 'admin / admin . php');
+			} else {
+				header('location: ' . BASE_URL);
+			}
+		} else {
+			$errorMessage = "Почта либо пароль введены неверно!";
+		}
+	}
+} else {
 	$email = '';
 }
 
