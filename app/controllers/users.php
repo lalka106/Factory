@@ -30,7 +30,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				'password' => $pass
 			];
 			$id = insert('users', $post);
-			$errorMessage = "Пользователь " . "<strong>" . $login . "</strong>" . " успешно зарегистрирован!";
+			$user = selectONE('users', ['id' => $id]);
+
+			$_SESSION['id'] = $user['id'];
+			$_SESSION['username'] = $user['username'];
+			$_SESSION['admin'] = $user['admin'];
+
+			if ($_SESSION['admin']) {
+				header('location :' . BASE_URL . 'admin / admin . php');
+			} else {
+				header('location: ' . BASE_URL);
+			}
 		}
 	}
 } else {
