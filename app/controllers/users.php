@@ -1,6 +1,19 @@
 <?php
 include("app/database/db.php");
 
+
+function userAut($array)
+{
+	$_SESSION['id'] = $array['id'];
+	$_SESSION['login'] = $array['username'];
+	$_SESSION['admin'] = $array['admin'];
+
+	if ($_SESSION['admin']) {
+		header('location :' . BASE_URL . 'admin / admin . php');
+	} else {
+		header('location: ' . BASE_URL);
+	}
+}
 $errorMessage = '';
 $status = '';
 //registration
@@ -31,16 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-reg'])) {
 			];
 			$id = insert('users', $post);
 			$user = selectONE('users', ['id' => $id]);
-
-			$_SESSION['id'] = $user['id'];
-			$_SESSION['login'] = $user['username'];
-			$_SESSION['admin'] = $user['admin'];
-
-			if ($_SESSION['admin']) {
-				header('location :' . BASE_URL . 'admin / admin . php');
-			} else {
-				header('location: ' . BASE_URL);
-			}
+			userAut($user);
 		}
 	}
 } else {
@@ -56,15 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-log'])) {
 	} else {
 		$existence = selectONE('users', ['email' => $email]);
 		if ($existence && password_verify($pass, $existence['password'])) {
-			$_SESSION['id'] = $existence['id'];
-			$_SESSION['login'] = $existence['username'];
-			$_SESSION['admin'] = $existence['admin'];
-
-			if ($_SESSION['admin']) {
-				header('location :' . BASE_URL . 'admin / admin . php');
-			} else {
-				header('location: ' . BASE_URL);
-			}
+			userAut($existence);
 		} else {
 			$errorMessage = "Почта либо пароль введены неверно!";
 		}
