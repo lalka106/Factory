@@ -6,14 +6,14 @@
 			</div>
 			<nav class="col-8">
 				<ul>
-					<li><a href="index.php">Главная</a></li>
+					<li><a href="<?php echo BASE_URL . "index.php" ?>">Главная</a></li>
 					<li><a href="#">О компании</a>
 						<ul>
 							<li><a href="#">Продукция</a></li>
 							<li><a href="#">Контакты</a></li>
 						</ul>
 					</li>
-					<li><a href="news.php">Новости</a></li>
+					<li><a href="<?php echo BASE_URL . "news.php" ?>">Новости</a></li>
 					<li><a href="#">Дилеры</a></li>
 					<li>
 						<?php if (isset($_SESSION['id'])) : ?>
@@ -25,17 +25,17 @@
 								<?php if ($_SESSION['admin']) : ?>
 									<li><a href="#">Админ панель</a></li>
 								<?php endif; ?>
-								<li><a href="#">Выход</a></li>
+								<li><a href="">Выход</a></li>
 							</ul>
 					</li>
 
 				<?php else : ?>
-					<a href="#">
+					<a href="<?php echo BASE_URL . "aut.php" ?>">
 						<i class="fa fa-user" aria-hidden="true"></i>
 						Вход
 					</a>
 					<ul>
-						<li><a href="reg.php">Регистрация</a></li>
+						<li><a href="<?php echo BASE_URL . "reg.php" ?>">Регистрация</a></li>
 					</ul>
 				<?php endif; ?>
 
