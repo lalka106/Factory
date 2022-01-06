@@ -1,4 +1,6 @@
-<?php include("path.php"); ?>
+<?php include("path.php");
+include("app/controllers/users.php"); ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,19 +20,24 @@
 	<div class="container reg_form">
 		<h2>Форма авторизации</h2>
 		<form class="row justify-content-center" method="post" action="aut.php">
-			<div class="mb-3 col-12 col-md-4">
-				<label for="formGroupExampleInput" class="form-label">Логин</label>
-				<input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
-			</div>
-			<div class="w-100"></div>
-			<div class="mb-3 col-12 col-md-4">
-				<label for="exampleInputPassword1" class="form-label">Пароль</label>
-				<input type="password" class="form-control" id="exampleInputPassword1">
+			<div class="error mb-3 col-12 col-md-4">
+				<p><?= $errorMessage ?></p>
 			</div>
 			<div class="w-100"></div>
 
 			<div class="mb-3 col-12 col-md-4">
-				<button type="submit" class="btn btn-primary">Авторизоваться</button>
+				<label for="formGroupExampleInput" class="form-label">Email</label>
+				<input name="email" value="<?= $email ?>" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+			</div>
+			<div class="w-100"></div>
+			<div class="mb-3 col-12 col-md-4">
+				<label for="exampleInputPassword1" class="form-label">Пароль</label>
+				<input name="pass" type="password" class="form-control" id="exampleInputPassword1">
+			</div>
+			<div class="w-100"></div>
+
+			<div class="mb-3 col-12 col-md-4">
+				<button type="submit" name="button-log" class="btn btn-primary">Авторизоваться</button>
 				<a href="reg.php">Зарегистрироваться</a>
 			</div>
 
