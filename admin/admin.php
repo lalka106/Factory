@@ -1,1 +1,2 @@
-echo "Панелька"
+<?php
+echo "gsf";

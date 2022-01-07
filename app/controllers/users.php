@@ -2,6 +2,7 @@
 include("app/database/db.php");
 
 
+
 function userAut($array)
 {
 	$_SESSION['id'] = $array['id'];
@@ -9,7 +10,7 @@ function userAut($array)
 	$_SESSION['admin'] = $array['admin'];
 
 	if ($_SESSION['admin']) {
-		header('location :' . BASE_URL . 'admin / admin . php');
+		header('location :' . BASE_URL . "admin/posts/index.php");
 	} else {
 		header('location: ' . BASE_URL);
 	}
