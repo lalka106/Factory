@@ -1,5 +1,6 @@
-<?php include("path.php");
-include("app/database/db.php");
+<?php
+include("path.php");
+include "app/controllers/sales.php";
 ?>
 
 <!DOCTYPE html>
@@ -133,8 +134,9 @@ include("app/database/db.php");
 					<div class="section sales">
 						<h3>Акции</h3>
 						<ul>
-							<li><a href="">Tuda</a></li>
-							<li><a href="">SUda</a></li>
+							<?php foreach ($sales as $key => $sale) : ?>
+								<li><a href=""><?= $sale['name']; ?></a></li>
+							<?php endforeach; ?>
 						</ul>
 					</div>
 				</div>
