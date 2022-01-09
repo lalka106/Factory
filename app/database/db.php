@@ -8,6 +8,7 @@ function tt($value)
 	echo '<pre>';
 	print_r($value);
 	echo '<pre>';
+	exit();
 }
 
 function doCheckError($query)
@@ -144,8 +145,6 @@ function update($table, $id, $params)
 function delete($table, $id)
 {
 	global $pdo;
-	$i = 0;
-	$str = '';
 	$delete = "DELETE FROM $table WHERE id = $id";
 
 	$query = $pdo->prepare($delete);

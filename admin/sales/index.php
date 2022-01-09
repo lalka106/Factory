@@ -1,5 +1,7 @@
-<?php session_start();
+<?php
+// session_start();
 include "../../path.php";
+include SITE_ROOT . "/app/controllers/sales.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,24 +25,24 @@ include "../../path.php";
 
 			<div class="posts col-9">
 				<div class="button row">
-					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/posts/created.php" ?>">Add Post</a>
+					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/sales/created.php" ?>">Add sale</a>
 					<span class="col-1"></span>
-					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/posts/index.php" ?>">Manage Posts</a>
+					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/sales/index.php" ?>">Manage sales</a>
 				</div>
 				<div class="row title-table">
-					<h2>Управление новостями</h2>
+					<h2>Управление акциями</h2>
 					<div class=" col-1">ID</div>
 					<div class=" col-4">TITLE</div>
-					<div class=" col-3">CREATED</div>
 					<div class=" col-4">Manage</div>
 				</div>
-				<div class="row post">
-					<div class="id col-1">1</div>
-					<div class="title col-4">new</div>
-					<div class="date col-3">2021 6:39</div>
-					<div class="edit col-2"><a href="">Edit</a></div>
-					<div class="delete col-2"><a href="">Delete</a></div>
-				</div>
+				<?php foreach ($sales as $key => $sale) : ?>
+					<div class="row post">
+						<div class="id col-1"><?= $key + 1; ?></div>
+						<div class="title col-4"><?= $sale['name']; ?></div>
+						<div class="edit col-2"><a href="edit.php?id=<?= $sale['id']; ?>">Edit</a></div>
+						<div class="delete col-2"><a href="edit.php?delete_id=<?= $sale['id']; ?>">Delete</a></div>
+					</div>
+				<?php endforeach; ?>
 			</div>
 		</div>
 	</div>

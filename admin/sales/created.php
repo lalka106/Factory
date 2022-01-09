@@ -1,5 +1,6 @@
 <?php session_start();
 include "../../path.php";
+include "../../app/controllers/sales.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,32 +24,41 @@ include "../../path.php";
 
 			<div class="posts col-9">
 				<div class="button row">
-					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/posts/created.php" ?>">Add Post</a>
+					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/sales/created.php" ?>">Add sale</a>
 					<span class="col-1"></span>
-					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/posts/index.php" ?>">Manage Posts</a>
+					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/sales/index.php" ?>">Manage sales</a>
 				</div>
 				<div class="row title-table">
-					<h2>Управление новостями</h2>
-					<div class=" col-1">ID</div>
-					<div class=" col-4">TITLE</div>
-					<div class=" col-3">CREATED</div>
-					<div class=" col-4">Manage</div>
+					<h2>Добавление акций</h2>
 				</div>
-				<div class="row post">
-					<div class="id col-1">1</div>
-					<div class="title col-4">new</div>
-					<div class="date col-3">2021 6:39</div>
-					<div class="edit col-2"><a href="">Edit</a></div>
-					<div class="delete col-2"><a href="">Delete</a></div>
+				<div class="row add-post">
+					<div class="error mb-12 col-12 col-12">
+						<p><?= $errorMessage ?></p>
+					</div>
+					<form action="created.php" method="POST">
+						<div class="col mb-4">
+							<input name="name" value="<?= $name ?>" type="text" class="form-control" placeholder="Title" aria-label="Название акции">
+						</div>
+						<div class="col">
+							<label for="editor" class="form-label">Описание акции</label>
+							<textarea name="description" class="form-control" id="editor" rows="6"><?= $description ?></textarea>
+						</div>
+
+						<div class="col mb-4">
+							<button name="sale-create" class="btn btn-primary" type="submit">Save</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 
 
-
+	<script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>
 	<!-- JavaScript Bundle with Popper -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<script src="../../assets/js/script.js"></script>
+
 </body>
 
 </html>
