@@ -1,6 +1,6 @@
-<?php session_start();
+<?php
 include "../../path.php";
-include "../../app/controllers/sales.php";
+include "../../app/controllers/categories.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,9 +24,9 @@ include "../../app/controllers/sales.php";
 
 			<div class="posts col-9">
 				<div class="button row">
-					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/sales/created.php" ?>">Add sale</a>
+					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/categories/created.php" ?>">Add sale</a>
 					<span class="col-1"></span>
-					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/sales/index.php" ?>">Manage sales</a>
+					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/categories/index.php" ?>">Manage sales</a>
 				</div>
 				<div class="row title-table">
 					<h2>Добавление акций</h2>
@@ -45,7 +45,7 @@ include "../../app/controllers/sales.php";
 						</div>
 
 						<div class="col mb-4">
-							<button name="sale-create" class="btn btn-primary" type="submit">Save</button>
+							<button name="category-create" class="btn btn-primary" type="submit">Save</button>
 						</div>
 					</form>
 				</div>

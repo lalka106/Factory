@@ -1,6 +1,6 @@
 <?php
 include("path.php");
-include "app/controllers/sales.php";
+include "app/controllers/categories.php";
 ?>
 
 <!DOCTYPE html>
@@ -131,11 +131,11 @@ include "app/controllers/sales.php";
 							<li><a href="">SUda</a></li>
 						</ul>
 					</div>
-					<div class="section sales">
-						<h3>Акции</h3>
+					<div class="section categories">
+						<h3>Категории</h3>
 						<ul>
-							<?php foreach ($sales as $key => $sale) : ?>
-								<li><a href=""><?= $sale['name']; ?></a></li>
+							<?php foreach ($categories as $key => $category) : ?>
+								<li><a href=""><?= $category['name']; ?></a></li>
 							<?php endforeach; ?>
 						</ul>
 					</div>

@@ -1,7 +1,7 @@
 <?php
 // session_start();
 include "../../path.php";
-include SITE_ROOT . "/app/controllers/sales.php";
+include SITE_ROOT . "/app/controllers/categories.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,9 +25,9 @@ include SITE_ROOT . "/app/controllers/sales.php";
 
 			<div class="posts col-9">
 				<div class="button row">
-					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/sales/created.php" ?>">Add sale</a>
+					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/categories/created.php" ?>">Add sale</a>
 					<span class="col-1"></span>
-					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/sales/index.php" ?>">Manage sales</a>
+					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/categories/index.php" ?>">Manage sales</a>
 				</div>
 				<div class="row title-table">
 					<h2>Управление акциями</h2>
@@ -35,12 +35,12 @@ include SITE_ROOT . "/app/controllers/sales.php";
 					<div class=" col-4">TITLE</div>
 					<div class=" col-4">Manage</div>
 				</div>
-				<?php foreach ($sales as $key => $sale) : ?>
+				<?php foreach ($categories as $key => $category) : ?>
 					<div class="row post">
 						<div class="id col-1"><?= $key + 1; ?></div>
-						<div class="title col-4"><?= $sale['name']; ?></div>
-						<div class="edit col-2"><a href="edit.php?id=<?= $sale['id']; ?>">Edit</a></div>
-						<div class="delete col-2"><a href="edit.php?delete_id=<?= $sale['id']; ?>">Delete</a></div>
+						<div class="title col-4"><?= $category['name']; ?></div>
+						<div class="edit col-2"><a href="edit.php?id=<?= $category['id']; ?>">Edit</a></div>
+						<div class="delete col-2"><a href="edit.php?delete_id=<?= $category['id']; ?>">Delete</a></div>
 					</div>
 				<?php endforeach; ?>
 			</div>

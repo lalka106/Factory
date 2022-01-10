@@ -1,5 +1,7 @@
-<?php session_start();
+<?php
 include "../../path.php";
+include "../../app/controllers/posts.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,27 +32,37 @@ include "../../path.php";
 				<div class="row title-table">
 					<h2>Добавление новостей</h2>
 				</div>
+				<div class="error col-12 col-12 col-12">
+					<p><?= $errorMessage ?></p>
+				</div>
 				<div class="row add-post">
-					<form action="created.php" method="POST">
+					<form action="created.php" method="POST" enctype="multipart/form-data">
 						<div class="col mb-4">
-							<input type="text" class="form-control" placeholder="Title" aria-label="Название новости">
+							<input name="title" type="text" class="form-control" placeholder="Title" aria-label="Название новости">
 						</div>
 						<div class="col">
 							<label for="editor" class="form-label">Содержимое новости</label>
-							<textarea class="form-control" id="editor" rows="6"></textarea>
+							<textarea name="content" class="form-control" id="editor" rows="6"></textarea>
 						</div>
 						<div class="input-group col mb-4 mt-4">
-							<input type="file" class="form-control" id="inputGroupFile02">
+							<input name="img" type="file" class="form-control" id="inputGroupFile02">
 							<label class="input-group-text" for="inputGroupFile02">Upload</label>
 						</div>
-						<select class="form-select mb-4" aria-label="Default select example">
-							<option selected>Open this select menu</option>
-							<option value="1">One</option>
-							<option value="2">Two</option>
-							<option value="3">Three</option>
+						<label for="">Категория</label>
+
+						<select name="category" class="form-select mb-4" aria-label="Default select example">
+							<?php foreach ($categories as $key => $category) : ?>
+								<option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+							<?php endforeach; ?>
 						</select>
-						<div class="col mb-4">
-							<button class="btn btn-primary" type="submit">Save</button>
+						<div class="form-check">
+							<input name="publish" class="form-check-input" type="checkbox" value="1" id="flexCheckDefault">
+							<label class="form-check-label" for="flexCheckDefault">
+								Опубликовать ?
+							</label>
+						</div>
+						<div class="col col-6">
+							<button name="add-post" class="btn btn-primary" type="submit">Save</button>
 						</div>
 					</form>
 				</div>

@@ -6,13 +6,13 @@ $errorMessage = '';
 $id = '';
 $name = '';
 $description = '';
-$sales = selectAll('sales');
+$categories = selectAll('categories');
 
 
 
 
-//create sale
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sale-create'])) {
+//create category
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['category-create'])) {
 	$name = trim($_POST['name']);
 	$description = trim($_POST['description']);
 
@@ -22,17 +22,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sale-create'])) {
 	} elseif (mb_strlen($name, 'UTF8') < 2) {
 		$errorMessage = "Название акции должна быть более 2-ух символов";
 	} else {
-		$existence = selectONE('sales', ['name' => $name]);
+		$existence = selectONE('categories', ['name' => $name]);
 		if ($existence['name'] === $name) {
 			$errorMessage = "Акция с таким названием уже есть";
 		} else {
-			$sale = [
+			$category = [
 				'name' => $name,
 				'description' => $description
 			];
-			$id = insert('sales', $sale);
-			$sale = selectONE('sales', ['id' => $id]);
-			header('location:' . BASE_URL . 'admin/sales/index.php');
+			$id = insert('categories', $category);
+			$category = selectONE('categories', ['id' => $id]);
+			header('location:' . BASE_URL . 'admin/categories/index.php');
 		}
 	}
 } else {
@@ -41,15 +41,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sale-create'])) {
 }
 
 
-//edit sales
+//edit category
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
 	$id = $_GET['id'];
-	$sale = selectONE('sales', ['id' => $id]);
-	$id = $sale['id'];
-	$name = $sale['name'];
-	$description = $sale['description'];
+	$category = selectONE('categories', ['id' => $id]);
+	$id = $category['id'];
+	$name = $category['name'];
+	$description = $category['description'];
 }
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sale-edit'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['category-edit'])) {
 	$name = trim($_POST['name']);
 	$description = trim($_POST['description']);
 	if ($name === '' || $description === '') {
@@ -57,21 +57,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sale-edit'])) {
 	} elseif (mb_strlen($name, 'UTF8') < 2) {
 		$errorMessage = "Название акции должна быть более 2-ух символов";
 	} else {
-		$sale = [
+		$category = [
 			'name' => $name,
 			'description' => $description
 		];
 		$id = $_POST['id'];
-		$sale_id = update('sales', $id, $sale);
-		header('location:' . BASE_URL . 'admin/sales/index.php');
+		$category_id = update('categories', $id, $category);
+		header('location:' . BASE_URL . 'admin/categories/index.php');
 	}
 }
 
 
 
-//delete sale
+//delete category
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['delete_id'])) {
 	$id = $_GET['delete_id'];
-	delete('sales', $id);
-	header('location:' . BASE_URL . 'admin/sales/index.php');
+	delete('categories', $id);
+	header('location:' . BASE_URL . 'admin/categories/index.php');
 }

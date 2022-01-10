@@ -154,3 +154,18 @@ function delete($table, $id)
 }
 
 // delete('users', 3, $params);
+
+
+
+//выбор автора для постов
+function selectAllfromPostsWithUsers($table1, $table2)
+{
+	global $pdo;
+	$select = "SELECT t1.id,t1.title,t1.img,t1.content,t1.status,t1.id_category,t1.created_date,t2.username from $table1 as t1 
+	JOIN $table2 as t2 ON t1.id_user = t2.id";
+
+	$query = $pdo->prepare($select);
+	$query->execute();
+	doCheckError($query);
+	return $query->fetchAll();
+}
