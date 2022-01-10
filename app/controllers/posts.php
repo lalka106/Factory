@@ -5,7 +5,7 @@ if (!$_SESSION) {
 	header('location:' . BASE_URL . 'aut.php');
 }
 
-$errorMessage = '';
+$errorMessage = [];
 $id = '';
 $title = '';
 $content = '';
@@ -29,17 +29,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-post'])) {
 		$destination = ROOT_PATH . '\assets\img\news\\' . $imageName;
 
 		if (strpos($fileType, 'image') === false) {
-		}
-
-		$result = move_uploaded_file($fileTmpName, $destination);
-
-		if ($result) {
-			$_POST['img'] = $imageName;
+			array_push($errorMessage, 'Загружаемый файл не является изображением');
 		} else {
-			$errorMessage = 'Ошибка при загрузке картинки на сервер';
+
+			$result = move_uploaded_file($fileTmpName, $destination);
+
+			if ($result) {
+				$_POST['img'] = $imageName;
+			} else {
+				array_push($errorMessage, 'Ошибка при загрузке изображения на сервер');
+			}
 		}
 	} else {
-		$errorMessage = 'Ошибка получения картинки';
+		array_push($errorMessage, 'Ошибка получения изображения');
 	}
 
 	$title = trim($_POST['title']);
@@ -48,9 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-post'])) {
 	$publish = isset($_POST['publish']) ? 1 : 0;
 
 	if ($title === '' || $content === '') {
-		$errorMessage = 'Не все поля заполненны!';
+		array_push($errorMessage, 'Не все поля заполненны!');
 	} elseif (mb_strlen($title, 'UTF8') < 7) {
-		$errorMessage = "Название поста должно быть более 7-ми символов";
+		array_push($errorMessage, 'Название поста должно быть более 7-ми символов');
 	} else {
 		$post = [
 			'id_user' => $_SESSION['id'],
