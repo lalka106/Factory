@@ -21,7 +21,7 @@
 
 		<form class="row justify-content-center" method="post" action="reg.php">
 			<div class="error mb-3 col-12 col-md-4">
-				<p><?= $errorMessage ?></p>
+				<?php include "app/helps/error_info.php" ?>
 			</div>
 			<div class="w-100"></div>
 

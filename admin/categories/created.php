@@ -31,10 +31,10 @@ include "../../app/controllers/categories.php";
 				<div class="row title-table">
 					<h2>Добавление акций</h2>
 				</div>
+				<div class="error mb-12 col-12 col-md-12">
+					<?php include "../../app/helps/error_info.php" ?>
+				</div>
 				<div class="row add-post">
-					<div class="error mb-12 col-12 col-12">
-						<p><?= $errorMessage ?></p>
-					</div>
 					<form action="created.php" method="POST">
 						<div class="col mb-4">
 							<input name="name" value="<?= $name ?>" type="text" class="form-control" placeholder="Title" aria-label="Название акции">

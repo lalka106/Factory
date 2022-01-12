@@ -1,6 +1,9 @@
-<?php include("path.php");
-include("app/database/db.php");
-$posts = selectAll('posts', ['status' => 1]);
+<?php
+include("path.php");
+include SITE_ROOT . '/app/database/db.php';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search-term'])) {
+	$posts = searchWithTitleAndContent($_POST['search-term'], 'posts', 'users');
+}
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +30,7 @@ $posts = selectAll('posts', ['status' => 1]);
 			<!-- <?php include("app/include/sidebar-catalog.php"); ?> -->
 
 			<div class="main-content col-md-9 col-12">
-				<h2>Последние новости</h2>
+				<h2>Результаты поиска</h2>
 
 				<?php foreach ($posts as $post) : ?>
 					<div class="post row">

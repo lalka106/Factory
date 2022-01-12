@@ -1,5 +1,6 @@
 <?php include("path.php");
 include("app/database/db.php");
+$post = selectONE('posts', ['id' => $_GET['post']]);
 ?>
 <!DOCTYPE html>
 <html lang="en">

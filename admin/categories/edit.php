@@ -24,18 +24,13 @@ include "../../app/controllers/categories.php";
 			<?php include("../../app/include/sidebar-admin.php"); ?>
 
 			<div class="posts col-9">
-				<div class="button row">
-					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/categories/created.php" ?>">Add sale</a>
-					<span class="col-1"></span>
-					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/categories/index.php" ?>">Manage sales</a>
-				</div>
 				<div class="row title-table">
 					<h2>Редактирование акций</h2>
 				</div>
+				<div class="error mb-12 col-12 col-md-12">
+					<?php include "../../app/helps/error_info.php" ?>
+				</div>
 				<div class="row add-post">
-					<div class="error mb-12 col-12 col-12">
-						<p><?= $errorMessage ?></p>
-					</div>
 					<form action="edit.php" method="POST">
 						<input name="id" value="<?= $id ?>" type="hidden">
 						<div class="col mb-4">

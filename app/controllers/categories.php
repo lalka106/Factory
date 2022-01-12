@@ -2,7 +2,7 @@
 include SITE_ROOT . "/app/database/db.php";
 
 
-$errorMessage = '';
+$errorMessage = [];
 $id = '';
 $name = '';
 $description = '';
@@ -18,13 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['category-create'])) {
 
 
 	if ($name === '' || $description === '') {
-		$errorMessage = 'Не все поля заполненны!';
+		array_push($errorMessage, 'Не все поля заполненны!');
 	} elseif (mb_strlen($name, 'UTF8') < 2) {
-		$errorMessage = "Название акции должна быть более 2-ух символов";
+		array_push($errorMessage, 'Название категории должно быть более 2-ух символов');
 	} else {
 		$existence = selectONE('categories', ['name' => $name]);
 		if ($existence['name'] === $name) {
-			$errorMessage = "Акция с таким названием уже есть";
+			array_push($errorMessage, 'Категория с таким названием уже есть');
 		} else {
 			$category = [
 				'name' => $name,
@@ -53,9 +53,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['category-edit'])) {
 	$name = trim($_POST['name']);
 	$description = trim($_POST['description']);
 	if ($name === '' || $description === '') {
-		$errorMessage = 'Не все поля заполненны!';
+		array_push($errorMessage, 'Не все поля заполненны!');
 	} elseif (mb_strlen($name, 'UTF8') < 2) {
-		$errorMessage = "Название акции должна быть более 2-ух символов";
+		array_push($errorMessage, 'Название категории должно быть более 2-ух символов');
 	} else {
 		$category = [
 			'name' => $name,

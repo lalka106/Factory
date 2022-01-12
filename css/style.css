@@ -207,6 +207,11 @@ header ul li a:hover {
   transition: all 0.3s;
 }
 
+.error li {
+  color: red;
+  font-style: italic;
+}
+
 .error p {
   color: red;
   font-style: italic;

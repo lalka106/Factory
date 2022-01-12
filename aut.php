@@ -20,9 +20,10 @@ include("app/controllers/users.php"); ?>
 	<?php include("app/include/header.php"); ?>
 	<div class="container reg_form">
 		<h2>Форма авторизации</h2>
+
 		<form class="row justify-content-center" method="post" action="aut.php">
 			<div class="error mb-3 col-12 col-md-4">
-				<p><?= $errorMessage ?></p>
+				<?php include "app/helps/error_info.php" ?>
 			</div>
 			<div class="w-100"></div>
 

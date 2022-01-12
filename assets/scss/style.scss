@@ -137,6 +137,10 @@ input {
 }
 
 .error {
+	li {
+		color: red;
+		font-style: italic;
+	}
 	p {
 		color: red;
 		font-style: italic;

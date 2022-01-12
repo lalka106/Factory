@@ -40,15 +40,15 @@ include "../../app/controllers/posts.php";
 				<?php foreach ($postsAdm as $key => $post) : ?>
 					<div class="row post">
 						<div class="id col-1"><?= $key + 1; ?></div>
-						<div class="title col-2"><?= $post['title'] ?></div>
+						<div class="title col-2"><?= mb_substr($post['title'], 0, 20, 'UTF-8') ?></div>
 						<div class="title col-2"><?= $post['username'] ?></div>
 						<div class="date col-2">2021 6:39</div>
-						<div class="edit col-2"><a href="">Edit</a></div>
-						<div class="delete col-2"><a href="">Delete</a></div>
+						<div class="edit col-2"><a href="edit.php?id=<?= $post['id'] ?>">Edit</a></div>
+						<div class="delete col-2"><a href="edit.php?delete_id=<?= $post['id'] ?>">Delete</a></div>
 						<?php if ($post['status']) : ?>
-							<div class="status col-1"><a href="">черновик</a></div>
+							<div class="status col-1"><a href="edit.php?publish=0&pub_id=<?= $post['id'] ?>">черновик</a></div>
 						<?php else : ?>
-							<div class="status col-1"><a href="">опубликовать</a></div>
+							<div class="status col-1"><a href="edit.php?publish=1&pub_id=<?= $post['id'] ?>">опубликовать</a></div>
 						<?php endif ?>
 					</div>
 				<?php endforeach; ?>

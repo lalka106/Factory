@@ -1,5 +1,7 @@
-<?php session_start();
+<?php
 include "../../path.php";
+include "../../app/controllers/users.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,19 +30,28 @@ include "../../path.php";
 					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/users/index.php" ?>">Manage users</a>
 				</div>
 				<div class="row title-table">
-					<h2>Управление пользователями</h2>
+					<h2>Пользователи</h2>
 					<div class=" col-1">ID</div>
-					<div class=" col-4">LOGIN</div>
-					<div class=" col-3">ADMIN</div>
+					<div class=" col-2">LOGIN</div>
+					<div class=" col-3">EMAIL</div>
+					<div class=" col-1">ROLE</div>
 					<div class=" col-4">Manage</div>
 				</div>
-				<div class="row post">
-					<div class="id col-1">1</div>
-					<div class="title col-4">Edik</div>
-					<div class="date col-3">Admin</div>
-					<div class="edit col-2"><a href="">Edit</a></div>
-					<div class="delete col-2"><a href="">Delete</a></div>
-				</div>
+				<?php foreach ($users as $key => $user) : ?>
+
+					<div class="row post">
+						<div class="id col-1"><?= $user['id'] ?></div>
+						<div class="title col-2"><?= $user['username']; ?></div>
+						<div class="title col-3"><?= $user['email']; ?></div>
+						<?php if ($user['admin'] == 1) : ?>
+							<div class="date col-1">Admin</div>
+						<?php else : ?>
+							<div class="date col-1">User</div>
+						<?php endif; ?>
+						<div class="edit col-2"><a href="edit.php?edit_id=<?= $user['id'] ?>">Edit</a></div>
+						<div class="delete col-2"><a href="index.php?delete_id=<?= $user['id'] ?>">Delete</a></div>
+					</div>
+				<?php endforeach; ?>
 			</div>
 		</div>
 	</div>

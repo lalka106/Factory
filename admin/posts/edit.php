@@ -24,25 +24,23 @@ include "../../app/controllers/posts.php";
 			<?php include("../../app/include/sidebar-admin.php"); ?>
 
 			<div class="posts col-9">
-				<div class="button row">
-					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/posts/created.php" ?>">Add Post</a>
-					<span class="col-1"></span>
-					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/posts/index.php" ?>">Manage Posts</a>
-				</div>
+
 				<div class="row title-table">
-					<h2>Добавление новостей</h2>
+					<h2>Редактирование новостей</h2>
 				</div>
 				<div class="error mb-12 col-12 col-md-12">
 					<?php include "../../app/helps/error_info.php" ?>
 				</div>
 				<div class="row add-post">
-					<form action="created.php" method="POST" enctype="multipart/form-data">
+					<form action="edit.php" method="POST" enctype="multipart/form-data">
+						<input value="<?= $id; ?>" name="id" type="hidden">
+
 						<div class="col mb-4">
-							<input value="<?= $title; ?>" name="title" type="text" class="form-control" placeholder="Title" aria-label="Название новости">
+							<input value="<?= $post['title'] ?>" name="title" type="text" class="form-control" placeholder="Title" aria-label="Название новости">
 						</div>
 						<div class="col">
 							<label for="editor" class="form-label">Содержимое новости</label>
-							<textarea name="content" class="form-control" id="editor" rows="6"><?= $content; ?></textarea>
+							<textarea name="content" class="form-control" id="editor" rows="6"><?= $post['content']; ?></textarea>
 						</div>
 						<div class="input-group col mb-4 mt-4">
 							<input name="img" type="file" class="form-control" id="inputGroupFile02">
@@ -52,17 +50,24 @@ include "../../app/controllers/posts.php";
 
 						<select name="category" class="form-select mb-4" aria-label="Default select example">
 							<?php foreach ($categories as $key => $category) : ?>
-								<option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+								<option value="<?= $category['id']; ?>"><?= $category['name']; ?></option>
 							<?php endforeach; ?>
 						</select>
 						<div class="form-check">
-							<input name="publish" class="form-check-input" type="checkbox" value="1" id="flexCheckDefault">
-							<label class="form-check-label" for="flexCheckDefault">
-								Опубликовать ?
-							</label>
+							<?php if (empty($publish) && $publish == 0) : ?>
+								<input name="publish" class="form-check-input" type="checkbox" id="flexCheckDefault">
+								<label class="form-check-label" for="flexCheckDefault">
+									Опубликовать ?
+								</label>
+							<?php else : ?>
+								<input name="publish" class="form-check-input" type="checkbox" id="flexCheckDefault" checked>
+								<label class="form-check-label" for="flexCheckDefault">
+									Опубликовать ?
+								</label>
+							<?php endif; ?>
 						</div>
 						<div class="col col-6">
-							<button name="add-post" class="btn btn-primary" type="submit">Save</button>
+							<button name="edit-post" class="btn btn-primary" type="submit">Save</button>
 						</div>
 					</form>
 				</div>

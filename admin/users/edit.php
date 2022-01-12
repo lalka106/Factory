@@ -36,14 +36,16 @@ include "../../app/controllers/users.php";
 					<?php include "../../app/helps/error_info.php" ?>
 				</div>
 				<div class="row add-post">
-					<form action="created.php" method="POST">
+					<form action="edit.php" method="POST">
+						<input name="id" value="<?= $id; ?>" type="hidden">
+
 						<div class="col">
 							<label for="formGroupExampleInput" class="form-label">Логин</label>
-							<input name="login" type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+							<input name="login" value="<?= $username; ?>" type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
 						</div>
 						<div class="col">
 							<label for="exampleInputEmail1" class="form-label">Email</label>
-							<input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+							<input readonly name="email" value="<?= $email; ?>" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
 							<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
 						</div>
 
@@ -57,13 +59,21 @@ include "../../app/controllers/users.php";
 							<input name="pass2" type="password" class="form-control" id="exampleInputPassword2">
 						</div>
 						<div class="form-check">
-							<input name="admin" class="form-check-input" value="1" type="checkbox" id="flexCheckDefault">
-							<label class="form-check-label" for="flexCheckDefault">
-								Admin ?
-							</label>
+							<?php if (empty($admin) && $admin == 0) : ?>
+								<input name="admin" class="form-check-input" value="1" type="checkbox" id="flexCheckDefault">
+								<label class="form-check-label" for="flexCheckDefault">
+									Admin ?
+								</label>
+							<?php else : ?>
+								<input name="admin" class="form-check-input" value="1" type="checkbox" id="flexCheckDefault" checked>
+								<label class="form-check-label" for="flexCheckDefault">
+									Admin ?
+								</label>
+							<?php endif; ?>
+
 						</div>
 						<div class="col">
-							<button name="create-user" class="btn btn-primary" type="submit">Save</button>
+							<button name="update-user" class="btn btn-primary" type="submit">Save</button>
 						</div>
 					</form>
 				</div>

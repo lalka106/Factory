@@ -68,42 +68,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-post'])) {
 		header('location:' . BASE_URL . 'admin/posts/index.php');
 	}
 } else {
+	$id = '';
 	$title = '';
 	$content = '';
+	$publish  = '';
+	$category = '';
 }
 
 
-// //edit category
-// if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
-// 	$id = $_GET['id'];
-// 	$category = selectONE('categories', ['id' => $id]);
-// 	$id = $category['id'];
-// 	$name = $category['name'];
-// 	$description = $category['description'];
-// }
-// if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['category-edit'])) {
-// 	$name = trim($_POST['name']);
-// 	$description = trim($_POST['description']);
-// 	if ($name === '' || $description === '') {
-// 		$errorMessage = 'Не все поля заполненны!';
-// 	} elseif (mb_strlen($name, 'UTF8') < 2) {
-// 		$errorMessage = "Название акции должна быть более 2-ух символов";
-// 	} else {
-// 		$category = [
-// 			'name' => $name,
-// 			'description' => $description
-// 		];
-// 		$id = $_POST['id'];
-// 		$category_id = update('categories', $id, $category);
-// 		header('location:' . BASE_URL . 'admin/categories/index.php');
-// 	}
-// }
+//edit post
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
+	$id = $_GET['id'];
+	$post = selectONE('posts', ['id' => $id]);
+	$id = $post['id'];
+	$title = $post['title'];
+	$content = $post['content'];
+	$category = $post['id_category'];
+	$publish = $post['status'];
+}
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit-post'])) {
+	$id = $_POST['id'];
+	$title = trim($_POST['title']);
+	$content = trim($_POST['content']);
+	$category = trim($_POST['category']);
+	$publish = isset($_POST['publish']) ? 1 : 0;
+
+	if ($title === '' || $content === '') {
+		array_push($errorMessage, 'Не все поля заполненны!');
+	} elseif (mb_strlen($title, 'UTF8') < 7) {
+		array_push($errorMessage, 'Название поста должно быть более 7-ми символов');
+	} else {
+		$post = [
+			'id_user' => $_SESSION['id'],
+			'title' => $title,
+			'content' => $content,
+			'img' => $_POST['img'],
+			'status' => $publish,
+			'id_category' => $category
+		];
+
+		$post = update('posts', $id, $post);
+		header('location:' . BASE_URL . 'admin/posts/index.php');
+	}
+}
+
+//status post'a
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pub_id'])) {
+	$id = $_GET['pub_id'];
+	$publish = $_GET['publish'];
+	$postID = update('posts', $id, ['status' => $publish]);
+	header('location:' . BASE_URL . 'admin/posts/index.php');
+	die();
+}
 
 
 
-// //delete category
-// if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['delete_id'])) {
-// 	$id = $_GET['delete_id'];
-// 	delete('categories', $id);
-// 	header('location:' . BASE_URL . 'admin/categories/index.php');
-// }
+//delete post
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['delete_id'])) {
+	$id = $_GET['delete_id'];
+	delete('posts', $id);
+	header('location:' . BASE_URL . 'admin/posts/index.php');
+}
