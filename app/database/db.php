@@ -201,3 +201,18 @@ function searchWithTitleAndContent($text, $table1, $table2)
 	doCheckError($query);
 	return $query->fetchAll();
 }
+
+
+//выод записей по отдельности
+function selectSinglePost($table1, $table2, $id)
+{
+	global $pdo;
+	$select = "SELECT t1.*,t2.username from $table1 as t1 
+	JOIN $table2 as t2 ON t1.id_user = t2.id
+	WHERE t1.id = $id";
+
+	$query = $pdo->prepare($select);
+	$query->execute();
+	doCheckError($query);
+	return $query->fetch();
+}

@@ -1,7 +1,11 @@
-<?php include("path.php");
-include("app/database/db.php");
-$post = selectSinglePost('posts', 'users', $_GET['post'])
+<?php
+include("path.php");
+include SITE_ROOT . '/app/database/db.php';
+$posts = selectAll('posts', ['id_category' => $_GET['id'], 'status' => 1]);
+$category = selectONE('categories', ['id' => $_GET['id']]);
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,20 +30,27 @@ $post = selectSinglePost('posts', 'users', $_GET['post'])
 			<!-- <?php include("app/include/sidebar-catalog.php"); ?> -->
 
 			<div class="main-content col-md-9 col-12">
-				<h2><?php echo $post['title'] ?></h2>
-				<div class="single_post row">
-
-					<div class="single_post_text col-12 ">
-						<div class="single_post_info">
-							Создано <i class="far fa-calendar"><?= $post['created_date'] ?></i>
-
+				<h2>Новости по категории <b><?= $category['name'] ?></b></h2>
+				<?php if (empty($posts)) : ?>
+					<div class="col-12 col-md-8">
+						<h3>Нету постов :(</h3>
+					</div>
+				<?php else : ?>
+					<?php foreach ($posts as $post) : ?>
+						<div class="post row">
+							<div class="post_img col-12 col-md-4">
+								<img class="img-thumbnail" src="<?= BASE_URL . 'assets/img/news/' . $post['img'] ?>" alt="<?= $post['title'] ?>">
+							</div>
+							<div class="post_text col-12 col-md-8">
+								<h3><a href="<?= BASE_URL . 'single_news.php?post=' . $post['id']; ?>"><?= mb_substr($post['title'], 0, 30, 'UTF-8') . '...' ?></a></h3>
+								<i class="far fa-calendar"><?= $post['created_date'] ?></i>
+								<p class="preview-text">
+									<?= mb_substr($post['content'], 0, 200, 'UTF-8') . '...' ?>
+								</p>
+							</div>
 						</div>
-						<div class="single_post_text col-12"><?= $post['content'] ?></div>
-					</div>
-					<div class="single_post_img col-12 ">
-						<img class="img-thumbnail" src="<?= BASE_URL . 'assets/img/news/' . $post['img'] ?>" alt="">
-					</div>
-				</div>
+					<?php endforeach; ?>
+				<?php endif; ?>
 			</div>
 			<div class="sidebar col-md-3 col-12">
 				<div class="section catalog_news">
@@ -58,6 +69,7 @@ $post = selectSinglePost('posts', 'users', $_GET['post'])
 				</div>
 			</div>
 		</div>
+	</div>
 </body>
 
 </html>

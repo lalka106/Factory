@@ -135,7 +135,7 @@ include "app/controllers/categories.php";
 						<h3>Категории</h3>
 						<ul>
 							<?php foreach ($categories as $key => $category) : ?>
-								<li><a href=""><?= $category['name']; ?></a></li>
+								<li><a href="<?= BASE_URL . 'category.php?id=' . $category['id'] ?>"><?= $category['name']; ?></a></li>
 							<?php endforeach; ?>
 						</ul>
 					</div>
