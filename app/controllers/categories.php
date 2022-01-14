@@ -40,7 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['category-create'])) {
 	$description = '';
 }
 
-
 //edit category
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
 	$id = $_GET['id'];

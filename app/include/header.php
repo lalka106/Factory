@@ -14,7 +14,7 @@
 						</ul>
 					</li>
 					<li><a href="<?php echo BASE_URL . "news.php" ?>">Новости</a></li>
-					<li><a href="#">Дилеры</a></li>
+					<li><a href="<?php echo BASE_URL . "dealers.php" ?>">Дилеры</a></li>
 					<li>
 						<?php if (isset($_SESSION['id'])) : ?>
 							<a href="#">

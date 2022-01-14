@@ -330,3 +330,14 @@ header ul li a:hover {
 .posts .post .id {
   font-weight: 500;
 }
+
+.post_text h4 {
+  color: black;
+  font-weight: 500;
+}
+
+.post_text .diler-text {
+  font-size: 15px;
+  margin: 0;
+  padding: 1px;
+}
