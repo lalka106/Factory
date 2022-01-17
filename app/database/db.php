@@ -187,6 +187,20 @@ function selectAllPosts($table1, $table2)
 
 
 
+//выбор директора в дилерах для постов
+function selectAllDirectorsForDealers($table1, $table2)
+{
+	global $pdo;
+	$select = "SELECT t1.*,t2.* from $table1 as t1 
+	JOIN $table2 as t2 ON t1.id_director = t2.id
+	WHERE t1.status = 1 ";
+
+	$query = $pdo->prepare($select);
+	$query->execute();
+	doCheckError($query);
+	return $query->fetchAll();
+}
+
 //поиск по содержимому и заголовкам
 function searchWithTitleAndContent($text, $table1, $table2)
 {

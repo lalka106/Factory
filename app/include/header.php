@@ -9,8 +9,8 @@
 					<li><a href="<?php echo BASE_URL . "index.php" ?>">Главная</a></li>
 					<li><a href="#">О компании</a>
 						<ul>
-							<li><a href="#">Продукция</a></li>
-							<li><a href="#">Контакты</a></li>
+							<li><a href="<?php echo BASE_URL . "catalog.php" ?>">Продукция</a></li>
+							<li><a href="<?php echo BASE_URL . "contact.php" ?>">Контакты</a></li>
 						</ul>
 					</li>
 					<li><a href="<?php echo BASE_URL . "news.php" ?>">Новости</a></li>

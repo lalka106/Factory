@@ -1,6 +1,8 @@
 <?php
 include("path.php");
 include "app/controllers/categories.php";
+$posts = selectAll('posts', ['status' => 1]);
+// tt($posts);
 ?>
 
 <!DOCTYPE html>
@@ -85,12 +87,12 @@ include "app/controllers/categories.php";
 	<div class="main">
 
 		<div class="container">
-			<div class="main__row">
+			<div class="main__row row">
 				<!-- <div class="main__catalog">
 					<h2 class="main__title">Уважаемые клиенты!
 					</h2>
 				</div> -->
-				<div class="sidebar col-md-2 col-12">
+				<div class="sidebar col-md-3 col-12">
 					<div class="section catalog">
 						<h3>Каталог</h3>
 						<ul>
@@ -127,8 +129,9 @@ include "app/controllers/categories.php";
 					<div class="section topics">
 						<h3>Новости</h3>
 						<ul>
-							<li><a href="">Tuda</a></li>
-							<li><a href="">SUda</a></li>
+							<?php foreach ($posts as $key => $post) : ?>
+								<li><a href="<?= BASE_URL . 'single_news.php?post=' . $post['id'] ?>"><?= $post['title']; ?></a></li>
+							<?php endforeach; ?>
 						</ul>
 					</div>
 					<div class="section categories">

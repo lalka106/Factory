@@ -1,7 +1,6 @@
 <?php
 include "../../path.php";
 include "../../app/controllers/dealers.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

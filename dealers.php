@@ -1,6 +1,7 @@
 <?php include("path.php");
 include("app/database/db.php");
-$dealers = selectAll('dealers', ['status' => 1]);
+// $dealers = selectAll('dealers', ['status' => 1]);
+$dealers = selectAllDirectorsForDealers('dealers', 'directors');
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +14,7 @@ $dealers = selectAll('dealers', ['status' => 1]);
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 	<link rel="stylesheet" href="css/style.css">
-	<title>Новости</title>
+	<title>Дилеры</title>
 </head>
 
 <body>
@@ -43,7 +44,7 @@ $dealers = selectAll('dealers', ['status' => 1]);
 							</p>
 							<p class="diler-text">
 								Директор –
-								<i class="fa fa-id-card" aria-hidden="true"></i><?= $dealer['id_director'] ?>
+								<i class="fa fa-id-card" aria-hidden="true"></i><?= $dealer['surname'] . ' ' . $dealer['name'] . ' ' . $dealer['patronymic'] ?>
 							</p>
 							<p class="diler-text">
 								Телефон –

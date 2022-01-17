@@ -217,6 +217,28 @@ header ul li a:hover {
   font-style: italic;
 }
 
+.contact .row {
+  margin: 10px 0px 20px 0px;
+  border-bottom: 1px solid gray;
+}
+
+.contact .row ul.rubles {
+  padding: 0px 0px 0px 40px;
+}
+
+.contact .row ul.rubles li {
+  text-decoration: underline;
+}
+
+.contact a {
+  text-decoration: underline;
+}
+
+.contact span {
+  color: red;
+  font-weight: bold;
+}
+
 .main-content h2 {
   margin: 30px 0;
 }

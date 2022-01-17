@@ -146,6 +146,34 @@ input {
 		font-style: italic;
 	}
 }
+
+//contact
+.contact {
+	.row {
+		margin: 10px 0px 20px 0px;
+		border-bottom: 1px solid gray;
+		ul.rubles {
+			padding: 0px 0px 0px 40px;
+			li {
+				text-decoration: underline;
+			}
+		}
+	}
+	a {
+		text-decoration: underline;
+	}
+	// strong,
+	// i {
+	// 	display: inline-block;
+	// }
+	span {
+		color: red;
+		font-weight: bold;
+	}
+}
+
+//end
+
 @import "_news";
 @import "_index";
 @import "_footer";
