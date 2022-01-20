@@ -363,3 +363,21 @@ header ul li a:hover {
   margin: 0;
   padding: 1px;
 }
+
+.card {
+  text-align: center;
+}
+
+.card a {
+  text-decoration: underline;
+}
+
+.card__title {
+  color: #0c380c;
+  font-weight: 500;
+  margin: 0px 0px 10px 0px;
+}
+
+.card img {
+  margin: 0 auto;
+}
