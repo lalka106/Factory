@@ -208,7 +208,7 @@ function searchWithTitleAndContent($text, $table1, $table2)
 	$text = trim(strip_tags(stripcslashes(htmlspecialchars($text))));
 	$select = "SELECT t1.*,t2.username from $table1 as t1 
 	JOIN $table2 as t2 ON t1.id_user = t2.id
-	WHERE t1.status = 1 AND t1.title like '%$text%' OR t1.content like '%$text%'";
+	WHERE t1.status = 1 AND (t1.title like '%$text%' OR t1.content like '%$text%')";
 
 	$query = $pdo->prepare($select);
 	$query->execute();
