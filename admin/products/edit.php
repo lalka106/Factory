@@ -1,7 +1,8 @@
 <?php
 include "../../path.php";
-include "../../app/controllers/posts.php";
-
+include "../../app/controllers/products.php";
+// $product = selectONE('product', ['id' => $_GET['id']]);
+// // tt($product);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +27,7 @@ include "../../app/controllers/posts.php";
 			<div class="posts col-9">
 
 				<div class="row title-table">
-					<h2>Редактирование новостей</h2>
+					<h2>Редактирование продуктов</h2>
 				</div>
 				<div class="error mb-12 col-12 col-md-12">
 					<?php include "../../app/helps/error_info.php" ?>
@@ -36,11 +37,20 @@ include "../../app/controllers/posts.php";
 						<input value="<?= $id; ?>" name="id" type="hidden">
 
 						<div class="col mb-4">
-							<input value="<?= $post['title'] ?>" name="title" type="text" class="form-control" placeholder="Title" aria-label="Название новости">
+							<input value="<?= $product['name'] ?>" name="name" type="text" class="form-control" placeholder="Title" aria-label="Название новости">
 						</div>
-						<div class="col">
-							<label for="editor" class="form-label">Содержимое новости</label>
-							<textarea name="content" class="form-control" id="editor" rows="6"><?= $post['content']; ?></textarea>
+						<div class="col mb-4">
+							<input value="<?= $product['description'] ?>" name="description" type="text" class="form-control" placeholder="Title" aria-label="Название новости">
+						</div>
+						<div class="col mb-4">
+							<label for="editor" class="form-label">Характеристики</label>
+							<textarea name="characteristic" class="form-control" id="editor" rows="6"><?= $product['characteristic']; ?></textarea>
+						</div>
+						<div class="col mb-4">
+							<input value="<?= $product['price'] ?>" name="price" type="number" class="form-control" placeholder="Title" aria-label="Название новости">
+						</div>
+						<div class="col mb-4">
+							<input value="<?= $product['count'] ?>" name="count" type="number" class="form-control" placeholder="Title" aria-label="Название новости">
 						</div>
 						<div class="input-group col mb-4 mt-4">
 							<input name="img" type="file" class="form-control" id="inputGroupFile02">
@@ -49,11 +59,11 @@ include "../../app/controllers/posts.php";
 						<label for="">Категория</label>
 
 						<select name="category" class="form-select mb-4" aria-label="Default select example">
-							<?php foreach ($categories as $key => $category) : ?>
+							<?php foreach ($types_product as $key => $category) : ?>
 								<option value="<?= $category['id']; ?>"><?= $category['name']; ?></option>
 							<?php endforeach; ?>
 						</select>
-						<div class="form-check">
+						<!-- <div class="form-check">
 							<?php if (empty($publish) && $publish == 0) : ?>
 								<input name="publish" class="form-check-input" type="checkbox" id="flexCheckDefault">
 								<label class="form-check-label" for="flexCheckDefault">
@@ -65,9 +75,9 @@ include "../../app/controllers/posts.php";
 									Опубликовать ?
 								</label>
 							<?php endif; ?>
-						</div>
+						</div> -->
 						<div class="col col-6">
-							<button name="edit-post" class="btn btn-primary" type="submit">Save</button>
+							<button name="edit-product" class="btn btn-primary" type="submit">Save</button>
 						</div>
 					</form>
 				</div>

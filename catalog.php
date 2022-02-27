@@ -3,7 +3,7 @@ include("path.php");
 include("app/database/db.php");
 
 $types = selectAll('type_catalog');
-// tt($types);
+// tt($_FILES);
 ?>
 
 <!DOCTYPE html>
@@ -50,6 +50,7 @@ $types = selectAll('type_catalog');
 				<div class="catalog col">
 					<div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-3">
 						<?php foreach ($types as $type) : ?>
+
 							<div class="card">
 								<img src="<?= BASE_URL . 'assets/img/type/' . $type['img'] ?>" alt="<?= $type['name'] ?>">
 								<div class="card__title"><a href="<?= BASE_URL . 'radio-tech.php?type=' . $type['id']; ?>"><?= $type['name'] ?></a></div>

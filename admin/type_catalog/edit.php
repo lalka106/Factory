@@ -1,7 +1,8 @@
 <?php
 // session_start();
 include "../../path.php";
-include "../../app/controllers/categories.php";
+include "../../app/controllers/types_catalog.php";
+// tt($type['img']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,27 +23,36 @@ include "../../app/controllers/categories.php";
 	<div class="container">
 		<div class="row">
 			<?php include("../../app/include/sidebar-admin.php"); ?>
-
 			<div class="posts col-9">
+				<div class="button row">
+					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/type_catalog/created.php" ?>">Add sale</a>
+					<span class="col-1"></span>
+					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/type_catalog/index.php" ?>">Manage sales</a>
+				</div>
 				<div class="row title-table">
-					<h2>Редактирование акций</h2>
+					<h2>Добавление типов в каталог</h2>
 				</div>
 				<div class="error mb-12 col-12 col-md-12">
 					<?php include "../../app/helps/error_info.php" ?>
 				</div>
 				<div class="row add-post">
-					<form action="edit.php" method="POST">
-						<input name="id" value="<?= $id ?>" type="hidden">
+					<form action="created.php" method="POST">
 						<div class="col mb-4">
 							<input name="name" value="<?= $name ?>" type="text" class="form-control" placeholder="Title" aria-label="Название акции">
 						</div>
+						<div class="col mb-4">
+							<input name="content" value="<?= $content ?>" type="text" class="form-control" placeholder="Content" aria-label="content">
+						</div>
 						<div class="col">
-							<label for="editor" class="form-label">Описание акции</label>
+							<label for="editor" class="form-label">Описание типа</label>
 							<textarea name="description" class="form-control" id="editor" rows="6"><?= $description ?></textarea>
 						</div>
-
+						<div class="input-group col mb-4 mt-4">
+							<input name="img" type="file" class="form-control" id="inputGroupFile02">
+							<label class="input-group-text" for="inputGroupFile02">Upload</label>
+						</div>
 						<div class="col mb-4">
-							<button name="category-edit" class="btn btn-primary" type="submit">Save</button>
+							<button name="type-create" class="btn btn-primary" type="submit">Save</button>
 						</div>
 					</form>
 				</div>

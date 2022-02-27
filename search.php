@@ -22,8 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search-term'])) {
 <body>
 	<?php include("app/include/header.php"); ?>
 
-
-
 	<div class="container">
 		<div class="container row">
 

@@ -3,8 +3,8 @@ include("path.php");
 include "app/controllers/types_catalog.php";
 // tt($_GET);
 $type = selectONE('type_product', ['id' => $_GET['type']]);
-$products = selectALL('product', ['id' => $_GET['type']]);
-// tt($type_product);
+$products = selectALL('product', ['id_type_product' => $type['id']]);
+// tt($products);
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +56,9 @@ $products = selectALL('product', ['id' => $_GET['type']]);
 					<div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-3">
 						<?php foreach ($products as $product) : ?>
 							<div class="card">
-								<img src="assets/img/laboratory.jpg" alt="">
+								<div class="single_post_img">
+									<img class="img-thumbnail" src="<?= BASE_URL . 'assets/img/news/' . $product['img'] ?>" alt="">
+								</div>
 								<div class="card__title"><a href="<?= BASE_URL . 'single_product.php?product=' . $product['id']; ?>"><?= $product['name'] ?></a></div>
 							</div>
 						<?php endforeach; ?>

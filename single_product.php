@@ -1,7 +1,6 @@
 <?php
 include("path.php");
 include "app/controllers/types_catalog.php";
-// tt($_GET);
 $product = selectONE('product', ['id' => $_GET['product']]);
 // tt($product);
 ?>
@@ -50,9 +49,13 @@ $product = selectONE('product', ['id' => $_GET['product']]);
 				<div class="catalog col">
 					<div class="info">
 						<h2><?= $product['name'] ?></h2>
-						<img class="tumbnail" src="" alt="">
-						<p><?= $product['description'] ?></p>
+						<div class="single_post_img col-12 ">
+							<img class="img-thumbnail" src="<?= BASE_URL . 'assets/img/news/' . $product['img'] ?>" alt="">
+						</div>
+						<p>Описание <?= $product['description'] ?></p>
 						<p><?= $product['characteristic'] ?></p>
+						<p>Цена <?= $product['price'] ?> руб.</p>
+						<p>Количество <?= $product['count'] ?></p>
 					</div>
 					<div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-3">
 
