@@ -35,7 +35,7 @@ include "../../app/controllers/dealers.php";
 					<?php include "../../app/helps/error_info.php" ?>
 				</div>
 				<div class="row add-post">
-					<form action="created.php" method="POST" enctype="multipart/form-data">
+					<form action="edit.php" method="POST" enctype="multipart/form-data">
 						<input value="<?= $id; ?>" name="id" type="hidden">
 
 						<div class="col mb-4">

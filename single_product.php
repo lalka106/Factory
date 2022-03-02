@@ -54,11 +54,11 @@ $product = selectONE('product', ['id' => $_GET['product']]);
 						</div>
 						<p>Описание <?= $product['description'] ?></p>
 						<p><?= $product['characteristic'] ?></p>
-						<p>Цена <?= $product['price'] ?> руб.</p>
-						<p>Количество <?= $product['count'] ?></p>
+						<p>Цена: <?= $product['price'] ?> руб.</p>
+						<p>Всего в наличии: <?= $product['count'] ?></p>
 					</div>
 					<div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-3">
-
+						<a href="<?= BASE_URL . 'buy.php?product=' . $product['id']; ?>"><button class="btn btn-success">Купить</button></a>
 					</div>
 				</div>
 			</div>

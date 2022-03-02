@@ -36,7 +36,8 @@ include "../../app/controllers/types_catalog.php";
 					<?php include "../../app/helps/error_info.php" ?>
 				</div>
 				<div class="row add-post">
-					<form action="created.php" method="POST">
+					<form action="edit.php" method="POST" enctype="multipart/form-data">
+						<input value="<?= $id; ?>" name="id" type="hidden">
 						<div class="col mb-4">
 							<input name="name" value="<?= $name ?>" type="text" class="form-control" placeholder="Title" aria-label="Название акции">
 						</div>
@@ -52,7 +53,7 @@ include "../../app/controllers/types_catalog.php";
 							<label class="input-group-text" for="inputGroupFile02">Upload</label>
 						</div>
 						<div class="col mb-4">
-							<button name="type-create" class="btn btn-primary" type="submit">Save</button>
+							<button name="category-edit" class="btn btn-primary" type="submit">Save</button>
 						</div>
 					</form>
 				</div>

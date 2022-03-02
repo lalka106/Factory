@@ -52,7 +52,9 @@ $types = selectAll('type_catalog');
 						<?php foreach ($types as $type) : ?>
 
 							<div class="card">
-								<img src="<?= BASE_URL . 'assets/img/type/' . $type['img'] ?>" alt="<?= $type['name'] ?>">
+								<div class="single_post_img">
+									<img class="img-thumbnail" src="<?= BASE_URL . 'assets/img/type/' . $type['img'] ?>" alt="">
+								</div>
 								<div class="card__title"><a href="<?= BASE_URL . 'radio-tech.php?type=' . $type['id']; ?>"><?= $type['name'] ?></a></div>
 								<div class="card__subtitle"><?= $type['content'] ?></div>
 							</div>

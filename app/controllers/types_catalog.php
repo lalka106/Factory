@@ -55,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type-create'])) {
 				'description' => $description,
 				'img' => $_POST['img']
 			];
+			// tt($type);
 			$type = insert('type_catalog', $type);
 			$type = selectONE('type_catalog', ['id' => $id]);
 			header('location:' . BASE_URL . 'admin/type_catalog/index.php');
@@ -115,17 +116,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['category-edit'])) {
 			'description' => $description,
 			'img' => $img
 		];
+		// tt($_POST);
 		$id = $_POST['id'];
-		$type_id = update('type_catalog', $id, $category);
+		$type_id = update('type_catalog', $id, $type);
 		header('location:' . BASE_URL . 'admin/type_catalog/index.php');
 	}
 }
 
 
 
-// //delete category
-// if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['delete_id'])) {
-// 	$id = $_GET['delete_id'];
-// 	delete('type_catalog', $id);
-// 	header('location:' . BASE_URL . 'admin/type_catalog/index.php');
-// }
+//delete category
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['delete_id'])) {
+	$id = $_GET['delete_id'];
+	delete('type_catalog', $id);
+	header('location:' . BASE_URL . 'admin/type_catalog/index.php');
+}

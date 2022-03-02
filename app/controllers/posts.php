@@ -62,7 +62,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-post'])) {
 			'status' => $publish,
 			'id_category' => $category
 		];
-
 		$post = insert('posts', $post);
 		$post = selectONE('posts', ['id' => $id]);
 		header('location:' . BASE_URL . 'admin/posts/index.php');
@@ -106,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit-post'])) {
 			'status' => $publish,
 			'id_category' => $category
 		];
-
+		// tt($_POST);
 		$post = update('posts', $id, $post);
 		header('location:' . BASE_URL . 'admin/posts/index.php');
 	}

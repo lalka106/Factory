@@ -35,7 +35,7 @@ include "../../app/controllers/types_catalog.php";
 					<?php include "../../app/helps/error_info.php" ?>
 				</div>
 				<div class="row add-post">
-					<form action="created.php" method="POST">
+					<form action="created.php" method="POST" enctype="multipart/form-data">
 						<div class="col mb-4">
 							<input name="name" value="<?= $name ?>" type="text" class="form-control" placeholder="Title" aria-label="Название акции">
 						</div>
