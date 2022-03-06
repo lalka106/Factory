@@ -31,22 +31,8 @@ $types = selectAll('type_catalog');
 					<h2 class="main__title">Уважаемые клиенты!
 					</h2>
 				</div> -->
-				<div class="sidebar col-md-3 col-12">
-					<div class="section catalog">
-						<h3>Каталог</h3>
-						<ul>
-							<li><a href="">Радиоизмерительная техника</a></li>
-							<li><a href="">Дозиметры</a></li>
-							<li><a href="">ЖК-мониторы</a></li>
-							<li><a href="">Автотракторная электроника</a></li>
-							<li><a href="">Моноблоки INFOTON</a></li>
-							<li><a href="">Видеонаблюдение</a></li>
-							<li><a href="">Поверхностный монтаж SMD компонентов</a></li>
-							<li><a href="">Автоматизация рабочих мест</a></li>
-							<li><a href="">Лаборатория проверка</a></li>
-						</ul>
-					</div>
-				</div>
+				<?php include("app/include/sidebar_catalog.php"); ?>
+
 				<div class="catalog col">
 					<div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-3">
 						<?php foreach ($types as $type) : ?>

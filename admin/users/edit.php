@@ -30,7 +30,7 @@ include "../../app/controllers/users.php";
 					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/users/index.php" ?>">Manage users</a>
 				</div>
 				<div class="row title-table">
-					<h2>Создание пользователя</h2>
+					<h2>Редактирование пользователя</h2>
 				</div>
 				<div class="error mb-12 col-12 col-md-12">
 					<?php include "../../app/helps/error_info.php" ?>

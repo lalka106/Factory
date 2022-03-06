@@ -381,3 +381,20 @@ header ul li a:hover {
 .card img {
   margin: 0 auto;
 }
+
+.order {
+  height: 100%;
+  padding: 40px 100px 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.order__info {
+  margin: 0px 0px 10px 30px;
+}
+
+.order__title {
+  text-align: center;
+  margin: 30px auto;
+}
