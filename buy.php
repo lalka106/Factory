@@ -36,7 +36,7 @@ include "app/controllers/order.php";
 
 				<div>Название товара: <?= $product['name'] ?></div>
 				<div>Стоимость товара: <?= $product['price'] ?> руб.</div>
-				<div>Всего товара: <?= $product['count'] ?> </div>
+				<div>Всего товара на складе: <?= $product['count'] ?> </div>
 				<!-- <div>Количество товара для покупки: <input value="<?= $count; ?>" name="count" type="number" class="form-control" placeholder="count" aria-label="count"></div> -->
 			</form>
 		</div>
@@ -47,7 +47,7 @@ include "app/controllers/order.php";
 			<h2>Контактная информация</h2>
 		</div>
 		<div class="error mb-12 col-12 col-md-12">
-			<?php include "../../app/helps/error_info.php" ?>
+			<?php include "app/helps/error_info.php" ?>
 		</div>
 		<div class="row add-post">
 			<form action="buy.php" method="POST">
@@ -55,11 +55,11 @@ include "app/controllers/order.php";
 
 				<div class="col">
 					<label for="formGroupExampleInput" class="form-label">Логин</label>
-					<input value="<?= $user['username']; ?>" name="login" type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+					<input value="<?= $user['username']; ?>" name="login" disabled type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
 				</div>
 				<div class="col">
 					<label for="exampleInputEmail1" class="form-label">Email</label>
-					<input value="<?= $user['email']; ?>" name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+					<input value="<?= $user['email']; ?>" name="email" disabled type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
 					<!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
 				</div>
 
