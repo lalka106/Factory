@@ -2,7 +2,7 @@
 include("path.php");
 include "app/controllers/types_catalog.php";
 $product = selectONE('product', ['id' => $_GET['product']]);
-// tt($product);
+// tt($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +43,11 @@ $product = selectONE('product', ['id' => $_GET['product']]);
 						<p>Всего в наличии: <?= $product['count'] ?></p>
 					</div>
 					<div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-3">
-						<a href="<?= BASE_URL . 'buy.php?product=' . $product['id']; ?>"><button class="btn btn-success">Купить</button></a>
+                        <?php if ($_SESSION) : ?>
+                            <a href="<?= BASE_URL . 'buy.php?product=' . $product['id']; ?>"><button class="btn btn-success">Купить</button></a>
+                        <?php else : ?>
+                            <a href="<?= BASE_URL . 'aut.php'; ?>"><button class="btn btn-success">Купить</button></a>
+                        <?php endif ?>
 					</div>
 				</div>
 			</div>

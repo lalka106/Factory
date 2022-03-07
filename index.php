@@ -142,7 +142,7 @@ $posts = selectAll('posts', ['status' => 1]);
 		<div class="footer-content container">
 			<div class="row">
 				<div class="footer-section about col-md-4 col-12">
-					<h6> 2022 УП "Завод СВТ". Все права защищены.</h5>
+					<h6> 2022 УП "Завод СВТ". Все права защищены.</h6>
 				</div>
 			</div>
 		</div>

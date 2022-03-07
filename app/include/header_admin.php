@@ -7,7 +7,7 @@
 			<nav class="col-8">
 				<ul>
 					<li>
-						<a href="#">
+						<a href="<?php echo BASE_URL . "index.php" ?>">
 							<i class="fa fa-user" aria-hidden="true"></i>
 							<?php echo $_SESSION['login']; ?>
 						</a>

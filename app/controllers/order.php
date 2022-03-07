@@ -22,10 +22,9 @@ $user = selectONE('users', ['id' => $_SESSION['id']]);
 
 //create post
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['product'])) {
-	// tt($_GET);
 	$id = $_GET['product'];
 	$product = selectONE('product', ['id' => $id]);
-	$id = $product['id'];
+    $id = $product['id'];
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order'])) {
 
@@ -46,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order'])) {
 	// tt($order);
 	$order = insert('product_order', $order);
 	$order = selectONE('product_order', ['id' => $id]);
-	header('location:' . BASE_URL . 'index.php');
+	header('location:' . BASE_URL . 'profile.php');
 } else {
 	$fio = '';
 	$result = '';
