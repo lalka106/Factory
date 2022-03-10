@@ -45,50 +45,7 @@ $types = selectAll('type_catalog');
 								<div class="card__subtitle"><?= $type['content'] ?></div>
 							</div>
 						<?php endforeach; ?>
-						<!-- 
-						<div class="card">
-							<img src="assets/img/dozimetri.jpg" alt="">
-							<div class="card__title"><a href="">Дозиметры</a></div>
-							<div class="card__subtitle">Измерение ионизирующего излучения</div>
-						</div>
 
-						<div class="card">
-							<img src="assets/img/monitors.jpg" alt="">
-							<div class="card__title"><a href="">ЖК-мониторы</a></div>
-							<div class="card__subtitle">Белорусские мониторы INFOTON</div>
-						</div>
-
-						<div class="card">
-							<img src="assets/img/monoblock.jpg" alt="">
-							<div class="card__title"><a href="">Моноблоки INFOTON</a></div>
-							<div class="card__subtitle">INFOTON Standart, Optima, Pro</div>
-						</div>
-
-						<div class="card">
-							<img src="assets/img/kameri.jpg" alt="">
-							<div class="card__title"><a href="">Видеонаблюдение</a></div>
-							<div class="card__subtitle">Проектирование, монтаж и ТО систем видеонаблюдения</div>
-						</div>
-						<div class="card">
-							<img src="assets/img/electronika.jpg" alt="">
-							<div class="card__title"><a href="">Автотракторная электроника</a></div>
-							<div class="card__subtitle">Автотракторная электроника и компоненты</div>
-						</div>
-						<div class="card">
-							<img src="assets/img/komponent.jpg" alt="">
-							<div class="card__title"><a href="">Поверхностный монтаж SMD компонентов</a></div>
-							<div class="card__subtitle">Поверхностный монтаж SMD компонентов</div>
-						</div>
-						<div class="card">
-							<img src="assets/img/avtomatization.jpg" alt="">
-							<div class="card__title"><a href="">Автоматизация рабочих мест</a></div>
-							<div class="card__subtitle">Создание автоматизированных рабочих мест,разработка и внедрение автоматизированных испытательных и метрологических стендов и др.</div>
-						</div>
-						<div class="card">
-							<img src="assets/img/laboratory.jpg" alt="">
-							<div class="card__title"><a href="">Лаборатория поверки</a></div>
-							<div class="card__subtitle">Лаборатория поверки</div>
-						</div> -->
 
 					</div>
 				</div>

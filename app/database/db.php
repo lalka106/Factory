@@ -21,9 +21,9 @@ function doCheckError($query)
 	return true;
 }
 
-$params = [
-	'admin' => 1,
-];
+//$params = [
+//	'admin' => 1,
+//];
 
 
 function selectAll($table, $params = [])
@@ -230,6 +230,8 @@ function selectSinglePost($table1, $table2, $id)
 	doCheckError($query);
 	return $query->fetch();
 }
+
+
 
 ////вывод заказов в профиль
 //function selectProductsForProfile($table1,$table2, $id)

@@ -116,7 +116,7 @@ $posts = selectAll('posts', ['status' => 1]);
 						<h3>Новости</h3>
 						<ul>
 							<?php foreach ($posts as $key => $post) : ?>
-								<li><a href="<?= BASE_URL . 'single_news.php?post=' . $post['id'] ?>"><?= $post['title']; ?></a></li>
+								<li><a style="font-size: 13px" href="<?= BASE_URL . 'single_news.php?post=' . $post['id'] ?>"><?= $post['title']; ?></a></li>
 							<?php endforeach; ?>
 						</ul>
 					</div>

@@ -1,7 +1,7 @@
 <?php
 include "../../path.php";
-include "../../app/controllers/products.php";
-
+include "../../app/controllers/order.php";
+$orders = selectAll('product_order',[]);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,26 +24,27 @@ include "../../app/controllers/products.php";
 			<?php include("../../app/include/sidebar-admin.php"); ?>
 
 			<div class="posts col-9">
-				<div class="button row">
-					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/products/created.php" ?>">Add Post</a>
-					<span class="col-1"></span>
-					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/products/index.php" ?>">Manage Posts</a>
-				</div>
+<!--				<div class="button row">-->
+<!--					<a class="col-3 btn btn-success" href="--><?php //echo BASE_URL . "admin/posts/created.php" ?><!--">Add Post</a>-->
+<!--					<span class="col-1"></span>-->
+<!--					<a class="col-3 btn btn-success" href="--><?php //echo BASE_URL . "admin/posts/index.php" ?><!--">Manage Posts</a>-->
+<!--				</div>-->
 				<div class="row title-table">
-					<h2>Управление товарами</h2>
+					<h2>Управление заказами</h2>
 					<div class=" col-1">ID</div>
-					<div class=" col-2">TITLE</div>
-					<div class=" col-2">COUNT</div>
-					<div class=" col-5">Manage</div>
+					<div class=" col-2">Товар</div>
+					<div class=" col-2">Количество</div>
+					<div class=" col-2">Заказчик</div>
+					<div class=" col-2">Итого</div>
+                    <div class=" col-2">Статус</div>
 				</div>
-				<?php foreach ($products as $key => $product) : ?>
+				<?php foreach ($orders as $key => $order) : ?>
 					<div class="row post">
 						<div class="id col-1"><?= $key + 1; ?></div>
-						<div class="title col-2"><?= mb_substr($product['name'], 0, 20, 'UTF-8') ?></div>
-						<div class="title col-2"><?= $product['count'] ?></div>
-						<div class="edit col-2"><a href="edit.php?id=<?= $product['id'] ?>">Edit</a></div>
-						<div class="delete col-2"><a href="edit.php?delete_id=<?= $product['id'] ?>">Delete</a></div>
-					</div>
+						<div class="title col-2"><?= $order['id_product'] ?></div>
+						<div class="title col-2"><?= $order['count'] ?></div>
+						<div class="title col-2"><?= $order['id_user'] ?></div>
+                        <div class="title col-2"><?= $order['result'] ?></div>
 				<?php endforeach; ?>
 			</div>
 		</div>

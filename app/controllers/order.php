@@ -14,7 +14,7 @@ $result = '';
 $id_product = '';
 
 // tt($_GET);
-$product = selectONE('product', ['id' => $_GET['product']]);
+//$product = selectONE('product', ['id' => $_GET['product']]);
 $user = selectONE('users', ['id' => $_SESSION['id']]);
 // tt($product);
 
@@ -29,23 +29,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['product'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order'])) {
 
 	$id_product = $_POST['id'];
+    $product = selectONE('product',['id'=>$id_product]);
+//    tt($product);
 	$fio = trim($_POST['fio']);
 	$id_user = trim($_SESSION['id']);
 	$count = trim($_POST['count']);
-	$result = trim($_POST['result']);
-	// if ($count > $product['count']) {
-	// 	array_push($errorMessage, 'неверное количество');
-	// }
-	$order = [
+	 if ($count > $product['count']) {
+	 	array_push($errorMessage,'Нехватает количества');
+         return;
+	 } elseif ($product['count'] ==0) {
+         array_push($errorMessage,'Нехватает количества');
+         return;
+     }
+    $result = $product['price']*$count;
+
+    $order = [
 		'id_product' => $id_product,
 		'count' => $count,
 		'id_user' => $id_user,
 		'result' => $result
 	];
-	// tt($order);
+//	 tt($order);
 	$order = insert('product_order', $order);
 	$order = selectONE('product_order', ['id' => $id]);
 	header('location:' . BASE_URL . 'profile.php');
+    update('product', $id_product, ['count' => $product['count'] - $count]);
 } else {
 	$fio = '';
 	$result = '';
