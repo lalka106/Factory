@@ -1,7 +1,7 @@
 <?php
 include "../../path.php";
-include "../../app/controllers/order.php";
-$orders = selectAll('product_order',[]);
+include "../../app/controllers/status.php";
+//$orders = selectAll('product_order', []);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,36 +24,42 @@ $orders = selectAll('product_order',[]);
 			<?php include("../../app/include/sidebar-admin.php"); ?>
 
 			<div class="posts col-9">
-<!--				<div class="button row">-->
-<!--					<a class="col-3 btn btn-success" href="--><?php //echo BASE_URL . "admin/posts/created.php" ?><!--">Add Post</a>-->
-<!--					<span class="col-1"></span>-->
-<!--					<a class="col-3 btn btn-success" href="--><?php //echo BASE_URL . "admin/posts/index.php" ?><!--">Manage Posts</a>-->
-<!--				</div>-->
-				<div class="row title-table">
-					<h2>Управление заказами</h2>
-					<div class=" col-1">ID</div>
-					<div class=" col-2">Товар</div>
-					<div class=" col-2">Количество</div>
-					<div class=" col-2">Заказчик</div>
-					<div class=" col-2">Итого</div>
-                    <div class=" col-2">Статус</div>
-				</div>
-				<?php foreach ($orders as $key => $order) : ?>
-					<div class="row post">
-						<div class="id col-1"><?= $key + 1; ?></div>
-						<div class="title col-2"><?= $order['id_product'] ?></div>
-						<div class="title col-2"><?= $order['count'] ?></div>
-						<div class="title col-2"><?= $order['id_user'] ?></div>
-                        <div class="title col-2"><?= $order['result'] ?></div>
-				<?php endforeach; ?>
+                <div class="row title-table">
+                    <h2>Управление заказами</h2>
+                    <div class=" col-1">ID</div>
+                    <div class=" col-2">Товар</div>
+                    <div class=" col-2">Количество</div>
+                    <div class=" col-2">Итого</div>
+                    <div class=" col-3">STATUS</div>
+                    <div class=" col-2">STATUS</div>
+                </div>
+                <?php
+                foreach ($orders as $key => $order) :
+                    $product = selectONE('product',['id' => $order['id_product']]);
+                    ?>
+                    <div class="row post">
+                        <div class="id col-1"><?= $key + 1; ?></div>
+                        <div class="title col-2"><?= $product['name'] ?></div>
+                        <div class="title col-2"><?= $order['count'] ?></div>
+                        <div class="title col-2"><?= $order['result']?> руб.</div>
+                        <div class="title col-3"><?= $order['status'] ?></div>
+                        <div class="edit col-2"><a href="edit.php?id=<?= $order['id'] ?>">Edit</a></div>
+<!--                        <div class="edit col-2"><a href="edit.php?id=--><?//= $dealer['id'] ?><!--">Edit</a></div>-->
+                        <!--                        --><?php //if ($dealer['status']) : ?>
+<!--                            <div class="status col-1"><a href="edit.php?publish=0&pub_id=--><?//= $dealer['id'] ?><!--">черновик</a></div>-->
+<!--                        --><?php //else : ?>
+<!--                            <div class="status col-1"><a href="edit.php?publish=1&pub_id=--><?//= $dealer['id'] ?><!--">опубликовать</a></div>-->
+<!--                        --><?php //endif ?>
+                    </div>
+                <?php endforeach; ?>
+					</div>
 			</div>
 		</div>
-	</div>
 
 
 
-	<!-- JavaScript Bundle with Popper -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+		<!-- JavaScript Bundle with Popper -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 
 </html>

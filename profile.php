@@ -27,17 +27,22 @@ $orders = selectAll('product_order',['id_user' => $_SESSION['id']]);
         <th scope="col">Товар</th>
         <th scope="col">Количество</th>
         <th scope="col">Стоимость</th>
+        <th scope="col">Описание</th>
         <th scope="col">Статус</th>
     </tr>
     </thead>
     <tbody>
-    <?php foreach ($orders as $key => $order) : ?>
+    <?php foreach ($orders as $key => $order) :
+        $product = selectONE('product',['id' => $order['id_product']]);
+
+        ?>
         <tr>
         <th scope="row"><?= $key + 1; ?></th>
-        <td><?=$order['id_product'] ?></td>
+        <td><a href="<?= BASE_URL . 'single_product.php?product=' . $product['id']; ?>"><?=$product['name'] ?></a></td>
         <td><?=$order['count'] ?></td>
         <td><?=$order['result'] ?> руб.</td>
-        <td><?=$order['status']?></td>
+        <td><?=$order['description']?></td>
+            <td><?=$order['status']?></td>
             <td style="color: red">Отменить</td>
 
         </tr>
