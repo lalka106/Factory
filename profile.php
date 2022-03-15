@@ -2,6 +2,8 @@
 include("path.php");
 include SITE_ROOT . '/app/database/db.php';
 $orders = selectAll('product_order',['id_user' => $_SESSION['id']]);
+
+//include 'word.php';
 ?>
 
 <!doctype html>
@@ -34,6 +36,7 @@ $orders = selectAll('product_order',['id_user' => $_SESSION['id']]);
     <tbody>
     <?php foreach ($orders as $key => $order) :
         $product = selectONE('product',['id' => $order['id_product']]);
+        $status = selectONE('product_status',['id' => $order['id_status']]);
 
         ?>
         <tr>
@@ -42,9 +45,20 @@ $orders = selectAll('product_order',['id_user' => $_SESSION['id']]);
         <td><?=$order['count'] ?></td>
         <td><?=$order['result'] ?> руб.</td>
         <td><?=$order['description']?></td>
-            <td><?=$order['status']?></td>
-            <td style="color: red">Отменить</td>
+            <?php if ($order['id_status'] == 3) : ?>
+            <td style="color: green"><?=$status['name']?></td>
+                <td><a href="<?= BASE_URL . 'word.php?id_product=' . $order['id']; ?>"><button type="submit">Док</button></a></td>
 
+            <?php endif;?>
+
+            <?php if ($order['id_status'] == 2) : ?>
+            <td style="color: red"><?=$status['name']?></td>
+            <?php endif;?>
+            <?php if ($order['id_status'] == 1) : ?>
+                <td style="color: brown"><?=$status['name']?></td>
+            <?php endif;?>
+
+            <td style="color: red">Отменить</td>
         </tr>
     <?php endforeach; ?>
 
