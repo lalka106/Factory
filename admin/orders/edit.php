@@ -1,6 +1,7 @@
 <?php
 include "../../path.php";
 include "../../app/controllers/status.php";
+//tt($_GET);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +37,11 @@ include "../../app/controllers/status.php";
                     <div class="col mb-4">
                         <input value="<?= $description; ?>" name="description" type="text" class="form-control" placeholder="description" aria-label="orders">
                     </div>
+                    <select name="status" class="form-select mb-4" aria-label="Default select example">
+                        <?php foreach ($product_status as $key => $status) : ?>
+                            <option value="<?= $status['id']; ?>"><?= $status['name']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
 
                     <div class="col col-6">
                         <button name="edit-order" class="btn btn-primary" type="submit">Save</button>
