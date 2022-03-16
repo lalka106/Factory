@@ -65,7 +65,7 @@ include "app/controllers/order.php";
 
 				<div class="col">
 					<label for="exampleInputPassword1" class="form-label">ФИО</label>
-					<input name="fio" type="text" class="form-control" id="exampleInputPassword1">
+					<input readonly name="fio" value="<?= $user['fio']?>" type="text" class="form-control" id="exampleInputPassword1">
 				</div>
 
 				<div class="col">

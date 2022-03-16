@@ -26,11 +26,12 @@ $users = selectAll('users');
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-reg'])) {
 	$admin = 0;
 	$login = trim($_POST['login']);
+    $fio = trim($_POST['fio']);
 	$email = trim($_POST['email']);
 	$pass1 = trim($_POST['pass1']);
 	$pass2 = trim($_POST['pass2']);
 
-	if ($login === '' || $email === '' || $pass1 === '') {
+	if ($login === '' || $email === '' || $pass1 === '' ) {
 		array_push($errorMessage, 'Не все поля заполненны!');
 	} elseif (mb_strlen($login, 'UTF8') < 2) {
 		array_push($errorMessage, 'Логин должен быть более 2-ух символов');
@@ -45,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-reg'])) {
 			$post = [
 				'admin' => $admin,
 				'username' => $login,
+                'fio' => $fio,
 				'email' => $email,
 				'password' => $pass
 			];
@@ -85,6 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create-user'])) {
 
 	$admin = 0;
 	$login = trim($_POST['login']);
+    $fio = trim($_POST['fio']);
 	$email = trim($_POST['email']);
 	$pass1 = trim($_POST['pass1']);
 	$pass2 = trim($_POST['pass2']);
@@ -107,6 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create-user'])) {
 			$user = [
 				'admin' => $admin,
 				'username' => $login,
+                'fio' => $fio,
 				'email' => $email,
 				'password' => $pass
 			];
@@ -127,12 +131,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['edit_id'])) {
 	$id = $user['id'];
 	$admin = $user['admin'];
 	$username = $user['username'];
+    $fio = $user['fio'];
 	$email = $user['email'];
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update-user'])) {
 	$id = $_POST['id'];
 	$email = trim($_POST['email']);
 	$login = trim($_POST['login']);
+    $fio = trim($_POST['fio']);
 	$pass1 = trim($_POST['pass1']);
 	$pass2 = trim($_POST['pass2']);
 	$admin = isset($_POST['admin']) ? 1 : 0;
@@ -147,6 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update-user'])) {
 		$user = [
 			'admin' => $admin,
 			'username' => $login,
+            'fio' => $fio,
 			'password' => $pass,
 		];
 

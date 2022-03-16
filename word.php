@@ -12,7 +12,11 @@ $document = new \PhpOffice\PhpWord\TemplateProcessor('./111.docx');
 $uploadDir = __DIR__;
 $outputFile = "заказИТОГ.docx";
 
-$fio = $user['username'];
+$fio = $user['fio'];
+//$date = date("d/m/Y");
+$d = date("d");
+$m = date("m");
+$y = date("Y");
 $id = $order['id'];
 $name = $product['name'];
 $count = $order['count'];
@@ -23,6 +27,10 @@ $document->setValue("id",$id);
 $document->setValue("count",$count);
 $document->setValue("name",$name);
 $document->setValue("result",$result);
+//$document->setValue("date",$date);
+$document->setValue("d",$d);
+$document->setValue("m",$m);
+$document->setValue("y",$y);
 
 $document->saveAs($outputFile);
 
