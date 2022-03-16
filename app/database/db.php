@@ -231,6 +231,18 @@ function selectSinglePost($table1, $table2, $id)
 	return $query->fetch();
 }
 
+function SearchProducts($proc,$text) {
+    global $pdo;
+    $call = "CALL " . $proc . "(:text);";
+
+    $query = $pdo->prepare($call);
+    $query->bindParam(":text",$text);
+    $query->execute();
+    doCheckError($query);
+    return $query->fetchAll();
+
+}
+
 
 
 ////вывод заказов в профиль

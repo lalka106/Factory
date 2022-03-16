@@ -2,7 +2,9 @@
 include("path.php");
 include SITE_ROOT . '/app/database/db.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search-term'])) {
-	$posts = searchWithTitleAndContent($_POST['search-term'], 'posts', 'users');
+//	$posts = searchWithTitleAndContent($_POST['search-term'], 'posts', 'users');
+    $products = SearchProducts('SearchProducts',$_POST['search-term']);
+//tt($products);
 }
 ?>
 
@@ -30,20 +32,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search-term'])) {
 			<div class="main-content col-md-9 col-12">
 				<h2>Результаты поиска</h2>
 
-				<?php foreach ($posts as $post) : ?>
+				<?php foreach ($products as $product) : ?>
 					<div class="post row">
 						<div class="post_img col-12 col-md-4">
-							<img class="img-thumbnail" src="<?= BASE_URL . 'assets/img/news/' . $post['img'] ?>" alt="<?= $post['title'] ?>">
+							<img class="img-thumbnail" src="<?= BASE_URL . 'assets/img/news/' . $product['img'] ?>" alt="<?= $product['name'] ?>">
 						</div>
 						<div class="post_text col-12 col-md-8">
-							<h3><a href="<?= BASE_URL . 'single_news.php?post=' . $post['id']; ?>"><?= mb_substr($post['title'], 0, 30, 'UTF-8') . '...' ?></a></h3>
-							<i class="far fa-calendar"><?= $post['created_date'] ?></i>
+							<h3><a href="<?= BASE_URL . 'single_product.php?product=' . $product['id']; ?>"><?= mb_substr($product['name'], 0, 30, 'UTF-8') . '...' ?></a></h3>
+<!--							<i class="far fa-calendar">--><?//= $product['created_date'] ?><!--</i>-->
 							<p class="preview-text">
-								<?= mb_substr($post['content'], 0, 200, 'UTF-8') . '...' ?>
+								<?= mb_substr($product['description'], 0, 200, 'UTF-8') . '...' ?>
 							</p>
 						</div>
 					</div>
 				<?php endforeach; ?>
+
+<!--                --><?php //foreach ($posts as $post) : ?>
+<!--					<div class="post row">-->
+<!--						<div class="post_img col-12 col-md-4">-->
+<!--							<img class="img-thumbnail" src="--><?//= BASE_URL . 'assets/img/news/' . $post['img'] ?><!--" alt="--><?//= $post['title'] ?><!--">-->
+<!--						</div>-->
+<!--						<div class="post_text col-12 col-md-8">-->
+<!--							<h3><a href="--><?//= BASE_URL . 'single_news.php?post=' . $post['id']; ?><!--">--><?//= mb_substr($post['title'], 0, 30, 'UTF-8') . '...' ?><!--</a></h3>-->
+<!--							<i class="far fa-calendar">--><?//= $post['created_date'] ?><!--</i>-->
+<!--							<p class="preview-text">-->
+<!--								--><?//= mb_substr($post['content'], 0, 200, 'UTF-8') . '...' ?>
+<!--							</p>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				--><?php //endforeach; ?>
 			</div>
 			<?php include("app/include/sidebar_catalog.php"); ?>
 

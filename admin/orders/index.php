@@ -25,6 +25,9 @@ include "../../app/controllers/status.php";
 			<?php include("../../app/include/sidebar-admin.php"); ?>
 
 			<div class="posts col">
+                <div class="button row">
+                    <a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/orders/history.php" ?>">History</a>
+                </div>
                 <div class="row title-table">
                     <h2>Управление заказами</h2>
                     <div class=" col">ID</div>
