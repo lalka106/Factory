@@ -1,8 +1,9 @@
 <?php
 include SITE_ROOT . "/app/database/db.php";
 
-if (!$_SESSION) {
-	header('location:' . BASE_URL . 'aut.php');
+if (!$_SESSION['id']) {
+//    array_push($errorMessage,'Требуется вход');
+    header('location:' . BASE_URL . 'aut.php');
 }
 
 $errorMessage = [];
