@@ -27,6 +27,7 @@ include "../../app/controllers/status.php";
 			<div class="posts col">
                 <div class="button row">
                     <a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/orders/history.php" ?>">History</a>
+                    <span class="col-1"></span>
                     <a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/orders/diagr.php" ?>">Diagramms</a>
                 </div>
                 <div class="row title-table">

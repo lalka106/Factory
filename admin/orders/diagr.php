@@ -1,8 +1,8 @@
 <?php
 include "../../path.php";
 include "../../app/controllers/order.php";
-$orders = selectAll('product_order');
-
+$orders = selectAll('productcount');
+$products = selectAll('product');
 //tt($products);
 ?>
 <!DOCTYPE html>
@@ -24,9 +24,13 @@ $orders = selectAll('product_order');
 <div class="container">
     <div class="row">
         <?php include("../../app/include/sidebar-admin.php"); ?>
+        <a href="<?= BASE_URL . 'word1.php' ?>"><button type="submit">Ведомость</button></a>
 
         <div>
             <canvas id="myChart"></canvas>
+        </div>
+        <div>
+            <canvas id="myChart1"></canvas>
         </div>
 
     </div>
@@ -35,27 +39,22 @@ $orders = selectAll('product_order');
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 <script>
-    let labels = [];
     let arr = new Map([]);
-    <?php foreach ($orders as $order) :
-        $product = selectONE('product', ['id' => $order['id_product']]);
-    ?>
-    arr.set('<?php echo $product['name'] ?>','<?php echo $order['count'] ?>');
-    labels +=['<?php echo $product['name'] . " "?>'];
+    <?php foreach ($orders as $order) :?>
+    arr.set('<?php echo $order['name']?>','<?php echo $order['count'] ?>');
 <?php endforeach; ?>
     console.log(arr);
-    let labe = labels.split(" ");
-    let uniqueChars = labe.filter((element, index) => {
-        return labe.indexOf(element) === index;
-    });
-
+    let labels = [];
     let date = [];
     for (let value of arr.values()) {
         date.push(+value);
     }
+    for (let value of arr.keys()) {
+        labels.push(value);
+    }
 
     const data = {
-        labels: uniqueChars,
+        labels: labels,
         datasets: [{
             label: 'Проданные товары',
             backgroundColor: 'rgb(255, 99, 132)',
@@ -71,6 +70,56 @@ $orders = selectAll('product_order');
     const myChart = new Chart(
         document.getElementById('myChart'),
         config
+    );
+
+    //2
+    const DATA_COUNT = 5;
+    const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
+    let arr1 = new Map([]);
+    <?php foreach ($products as $product) :?>
+    arr1.set('<?php echo $product['name']?>','<?php echo $product['count'] ?>');
+    <?php endforeach; ?>
+    let labels1 = [];
+    let date1 = [];
+    for (let value of arr1.values()) {
+        date1.push(+value);
+    }
+    for (let value of arr1.keys()) {
+        labels1.push(value);
+    }
+
+    const data1 = {
+        labels: labels1,
+        datasets: [{
+            label: 'Товаров в наличии',
+            backgroundColor: 'red',
+            borderColor: 'black',
+            data: date1,
+        }]
+    };
+    const config1 = {
+        type: 'pie',
+        data: data1,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Учёт запасов продукции на складе'
+                }
+            }
+        },
+    };
+
+
+
+
+    const myChart1 = new Chart(
+        document.getElementById('myChart1'),
+        config1
     );
 </script>
 <!-- JavaScript Bundle with Popper -->

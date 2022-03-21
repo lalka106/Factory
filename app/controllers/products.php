@@ -51,6 +51,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-product'])) {
 	$characteristic = trim($_POST['characteristic']);
 	$price = $_POST['price'];
 	$count = $_POST['count'];
+    if ($count <= 0 || $price <=0) {
+        array_push($errorMessage,'>0');
+        return;
+    }
 	$category = trim($_POST['category']);
 	if ($name === '' || $description === '') {
 		array_push($errorMessage, 'Не все поля заполненны!');
@@ -100,6 +104,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit-product'])) {
 	$characteristic = trim($_POST['characteristic']);
 	$price = trim($_POST['price']);
 	$count = trim($_POST['count']);
+    if ($count <= 0 || $price <=0) {
+        array_push($errorMessage,'>0');
+        return;
+    }
 	$category = trim($_POST['category']);
 
 	if ($name === '' || $description === '') {
