@@ -62,6 +62,8 @@ $dealers = selectAllDirectorsForDealers('dealers', 'directors');
 
 		</div>
 	</div>
+    <?php include('app/include/modal+scripts.php'); ?>
+
 </body>
 
 </html>

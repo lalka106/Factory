@@ -9,7 +9,7 @@ function userAut($array)
 	$_SESSION['id'] = $array['id'];
 	$_SESSION['login'] = $array['username'];
 	$_SESSION['admin'] = $array['admin'];
-
+    $_SESSION['fio'] = $array['fio'];
 	if ($_SESSION['admin']) {
 		header('location:' . BASE_URL . 'admin/posts/index.php');
 	} else {

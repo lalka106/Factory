@@ -1,10 +1,12 @@
 <?php
-include SITE_ROOT . "/app/database/db.php";
+include_once("path.php");
 
-if (!$_SESSION['id']) {
-//    array_push($errorMessage,'Требуется вход');
-    header('location:' . BASE_URL . 'aut.php');
-}
+include_once SITE_ROOT . "/app/database/db.php";
+
+//if (empty($_SESSION['id'])) {
+////    array_push($errorMessage,'Требуется вход');
+//    header('location:' . BASE_URL . 'aut.php');
+//}
 
 $errorMessage = [];
 $id = '';
@@ -20,46 +22,90 @@ $user = selectONE('users', ['id' => $_SESSION['id']]);
 // tt($product);
 
 
-
-//create post
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['product'])) {
-	$id = $_GET['product'];
-	$product = selectONE('product', ['id' => $id]);
-    $id = $product['id'];
-}
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order'])) {
+    foreach ($_SESSION['cart'] as $id => $item) {
+        $id_product = $id;
+//        tt($id);
+//        $product = selectONE('product', ['id' => $id_product]);
+        $fio = trim($_SESSION['fio']);
+        $id_user = trim($_SESSION['id']);
+        $count = trim($item['count_choose']);
+        if ($count > $item['count']) {
+            array_push($errorMessage, 'Нехватает количества');
+            return;
+        } elseif ($count < 0) {
+            array_push($errorMessage, '>0');
+            return;
+        }
 
-	$id_product = $_POST['id'];
-    $product = selectONE('product',['id'=>$id_product]);
-//    tt($product);
-	$fio = trim($_POST['fio']);
-	$id_user = trim($_SESSION['id']);
-	$count = trim($_POST['count']);
-	 if ($count > $product['count']) {
-	 	array_push($errorMessage,'Нехватает количества');
-         return;
-	 } elseif ($product['count'] ==0) {
-         array_push($errorMessage,'Нехватает количества');
-         return;
-     }
-    $result = $product['price']*$count;
-
-    $order = [
-		'id_product' => $id_product,
-		'count' => $count,
-		'id_user' => $id_user,
-		'result' => $result
-	];
+        $order = [
+            'id_product' => $id_product,
+            'count' => $count,
+            'id_user' => $id_user,
+            'result' => $item['total_sum']
+        ];
 //	 tt($order);
-	$order = insert('product_order', $order);
-	$order = selectONE('product_order', ['id' => $id]);
-	header('location:' . BASE_URL . 'profile.php');
-    update('product', $id_product, ['count' => $product['count'] - $count]);
+        $order = insert('product_order', $order);
+        $order = selectONE('product_order', ['id' => $id]);
+        if (!empty($_SESSION['cart'])) {
+            unset($_SESSION['cart']);
+            unset($_SESSION['cart.sum']);
+            unset($_SESSION['cart.count']);
+        }
+        header('location:' . BASE_URL . 'profile.php');
+        update('product', $id_product, ['count' => $item['count'] - $count]);
+    }
 } else {
-	$fio = '';
-	$result = '';
-	$count = '';
+    $fio = '';
+    $result = '';
+    $count = '';
 }
+
+
+
+
+
+
+//for old version
+
+////create post
+//if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['product'])) {
+//	$id = $_GET['product'];
+//	$product = selectONE('product', ['id' => $id]);
+//    $id = $product['id'];
+//}
+//if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order'])) {
+//
+//	$id_product = $_POST['id'];
+//    $product = selectONE('product',['id'=>$id_product]);
+//	$fio = trim($_POST['fio']);
+//	$id_user = trim($_SESSION['id']);
+//	$count = trim($_POST['count']);
+//	 if ($count > $product['count']) {
+//	 	array_push($errorMessage,'Нехватает количества');
+//         return;
+//	 } elseif ($count < 0) {
+//         array_push($errorMessage,'>0');
+//         return;
+//     }
+//    $result = $product['price']*$count;
+//
+//    $order = [
+//		'id_product' => $id_product,
+//		'count' => $count,
+//		'id_user' => $id_user,
+//		'result' => $result
+//	];
+////	 tt($order);
+//	$order = insert('product_order', $order);
+//	$order = selectONE('product_order', ['id' => $id]);
+//	header('location:' . BASE_URL . 'profile.php');
+//    update('product', $id_product, ['count' => $product['count'] - $count]);
+//} else {
+//	$fio = '';
+//	$result = '';
+//	$count = '';
+//}
 
 
 // //edit post

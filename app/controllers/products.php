@@ -24,57 +24,63 @@ $types_product = selectAll('type_product');
 
 //create post
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-product'])) {
-	if (!empty($_FILES['img']['name'])) {
-		$imageName = time() . "_" . $_FILES['img']['name'];
-		$fileTmpName = $_FILES['img']['tmp_name'];
-		$fileType = $_FILES['img']['type'];
-		$destination = ROOT_PATH . '\assets\img\news\\' . $imageName;
+    if (!empty($_FILES['img']['name'])) {
+        $imageName = time() . "_" . $_FILES['img']['name'];
+        $fileTmpName = $_FILES['img']['tmp_name'];
+        $fileType = $_FILES['img']['type'];
+        $destination = ROOT_PATH . '\assets\img\news\\' . $imageName;
 
-		if (strpos($fileType, 'image') === false) {
-			array_push($errorMessage, 'Загружаемый файл не является изображением');
-		} else {
+        if (strpos($fileType, 'image') === false) {
+            array_push($errorMessage, 'Загружаемый файл не является изображением');
+        } else {
 
-			$result = move_uploaded_file($fileTmpName, $destination);
+            $result = move_uploaded_file($fileTmpName, $destination);
 
-			if ($result) {
-				$_POST['img'] = $imageName;
-			} else {
-				array_push($errorMessage, 'Ошибка при загрузке изображения на сервер');
-			}
-		}
-	} else {
-		array_push($errorMessage, 'Ошибка получения изображения');
-	}
+            if ($result) {
+                $_POST['img'] = $imageName;
+            } else {
+                array_push($errorMessage, 'Ошибка при загрузке изображения на сервер');
+            }
+        }
+    } else {
+        array_push($errorMessage, 'Ошибка получения изображения');
+    }
 
-	$name = trim($_POST['name']);
-	$description = trim($_POST['description']);
-	$characteristic = trim($_POST['characteristic']);
-	$price = $_POST['price'];
-	$count = $_POST['count'];
-    if ($count <= 0 || $price <=0) {
-        array_push($errorMessage,'>0');
+    $name = trim($_POST['name']);
+    $description = trim($_POST['description']);
+    $characteristic = trim($_POST['characteristic']);
+    $price = $_POST['price'];
+    $count = $_POST['count'];
+    if ($count <= 0 || $price <= 0) {
+        array_push($errorMessage, '>0');
         return;
     }
-	$category = trim($_POST['category']);
-	if ($name === '' || $description === '') {
-		array_push($errorMessage, 'Не все поля заполненны!');
-	} elseif (mb_strlen($name, 'UTF8') < 5) {
-		array_push($errorMessage, 'Название поста должно быть более 7-ми символов');
-	} else {
-		$product = [
-			'name' => $name,
-			'description' => $description,
-			'img' => $_POST['img'],
-			'price' => $price,
-			'count' => $count,
-			'characteristic' => $characteristic,
-			'id_type_product' => $category
-		];
-		$product = insert('product', $product);
-		$product = selectONE('product', ['id' => $id]);
-		header('location:' . BASE_URL . 'admin/products/index.php');
-	}
-} else {
+    $category = trim($_POST['category']);
+    if ($name === '' || $description === '') {
+        array_push($errorMessage, 'Не все поля заполненны!');
+    } elseif (mb_strlen($name, 'UTF8') < 5) {
+        array_push($errorMessage, 'Название поста должно быть более 7-ми символов');
+    } else {
+        $existence = selectONE('product', ['name' => $name]);
+
+        if (!empty($existence['name']) && $existence['name'] === $name) {
+            array_push($errorMessage, 'Такой продукт уже существует');
+        } else {
+            $product = [
+                'name' => $name,
+                'description' => $description,
+                'img' => $_POST['img'],
+                'price' => $price,
+                'count' => $count,
+                'characteristic' => $characteristic,
+                'id_type_product' => $category
+            ];
+            $product = insert('product', $product);
+            $product = selectONE('product', ['id' => $id]);
+            header('location:' . BASE_URL . 'admin/products/index.php');
+        }
+    }
+}else {
 	$name = '';
 	$description = '';
 	$characteristic  = '';

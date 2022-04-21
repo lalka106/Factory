@@ -58,6 +58,8 @@ $post = selectSinglePost('posts', 'users', $_GET['post'])
 				</div>
 			</div>
 		</div>
+        <?php include('app/include/modal+scripts.php'); ?>
+
 </body>
 
 </html>

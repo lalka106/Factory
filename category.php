@@ -56,6 +56,8 @@ $category = selectONE('categories', ['id' => $_GET['id']]);
 
 		</div>
 	</div>
+    <?php include('app/include/modal+scripts.php'); ?>
+
 </body>
 
 </html>

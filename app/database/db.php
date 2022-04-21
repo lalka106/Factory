@@ -259,3 +259,20 @@ function SearchProducts($proc,$text) {
 //    return $query->fetch();
 //}
 
+function add_to($product) {
+    if(isset($_SESSION['cart'][$product['id']])) {
+        $_SESSION['cart'][$product['id']]['count_choose'] +=1;
+        $_SESSION['cart'][$product['id']]['total_sum'] += $_SESSION['cart'][$product['id']]['price'];
+    } else {
+        $_SESSION['cart'][$product['id']] = [
+            'name' => $product['name'],
+            'count' => $product['count'],
+            'count_choose' => 1,
+            'img' => $product['img'],
+            'price' => $product['price'],
+            'total_sum' => $product['price']
+        ];
+    }
+    $_SESSION['cart.count'] = !empty($_SESSION['cart.count']) ? ++$_SESSION['cart.count'] :1;
+    $_SESSION['cart.sum'] = !empty($_SESSION['cart.sum']) ? $_SESSION['cart.sum'] + $product['price'] : $product['price'];
+}

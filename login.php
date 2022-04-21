@@ -42,9 +42,8 @@ include("app/controllers/users.php")
 		</div>
 	</div>
 
-	<!-- @@include('_footer.html') -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="js/script.min.js"></script>
+	<?php include('app/include/modal+scripts.php'); ?>
+
 </body>
 
 </html>

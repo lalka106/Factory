@@ -48,6 +48,7 @@ $posts = selectAll('posts', ['status' => 1]);
 
 		</div>
 	</div>
+    <?php include('app/include/modal+scripts.php'); ?>
 </body>
 
 </html>

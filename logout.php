@@ -9,3 +9,4 @@ unset($_SESSION['admin']);
 
 
 header('location:' . BASE_URL);
+session_destroy();

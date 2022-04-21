@@ -1,7 +1,7 @@
 <header class="container-fluid">
 	<div class="container">
 		<div class="row">
-			<div class="col-4">
+			<div class="col-2">
 				<h1>Завод СВТ</h1>
 			</div>
 			<nav class="col-8">
@@ -43,6 +43,13 @@
 
 				</ul>
 			</nav>
+            <div class="col-2">
+
+                    <button id="get-cart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#cart-modal">
+                        Корзина <span class="badge badge-light mini-cart-qty"><?= $_SESSION['cart.count'] ?? 0 ?></span>
+                    </button>
+
+            </div>
 
 			<div class="header__burger">
 				<span></span>

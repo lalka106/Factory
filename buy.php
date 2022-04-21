@@ -1,11 +1,11 @@
 <?php
-include("path.php");
+//include("path.php");
 include "app/controllers/order.php";
 
 // include SITE_ROOT . "/app/database/db.php";
 // $type = selectONE('type_product', ['id' => $_GET['type']]);
 
-// tt($product);
+// tt($_SESSION);
 
 ?>
 <!DOCTYPE html>
@@ -27,19 +27,20 @@ include "app/controllers/order.php";
 		<h2>Оформление заказа</h2>
 	</div>
 	<div class="order col-8">
-
+    <?php foreach ($_SESSION['cart'] as $key => $item) : ?>
 		<div class="post_img col-12 col-md-4">
-			<img class="img-thumbnail" src="<?= BASE_URL . 'assets/img/news/' . $product['img'] ?>" alt="<?= $product['name'] ?>">
+			<img class="img-thumbnail" src="<?= BASE_URL . 'assets/img/news/' . $item['img'] ?>" alt="<?= $item['name'] ?>">
 		</div>
 		<div class="order__info">
 			<form action="buy.php" method="POST" enctype="multipart/form-data">
 
-				<div>Название товара: <?= $product['name'] ?></div>
-				<div>Стоимость товара: <?= $product['price'] ?> руб.</div>
-				<div>Всего товара на складе: <?= $product['count'] ?> </div>
+				<div>Название товара: <?= $item['name'] ?></div>
+				<div>Стоимость товара: <?= $item['price'] ?> руб.</div>
+				<div>Всего товара на складе: <?= $item['count'] ?> </div>
 				<!-- <div>Количество товара для покупки: <input value="<?= $count; ?>" name="count" type="number" class="form-control" placeholder="count" aria-label="count"></div> -->
 			</form>
 		</div>
+    <?php endforeach; ?>
 
 	</div>
 	<div class="posts col-12">
@@ -51,7 +52,7 @@ include "app/controllers/order.php";
 		</div>
 		<div class="row add-post">
 			<form action="buy.php" method="POST">
-				<input value="<?= $product['id']; ?>" name="id" type="hidden">
+				<input value="<?= $key; ?>" name="id" type="hidden">
 
 				<div class="col">
 					<label for="formGroupExampleInput" class="form-label">Логин</label>
@@ -70,11 +71,11 @@ include "app/controllers/order.php";
 
 				<div class="col">
 					<label for="exampleInEmail1" class="form-label">Количество товара для покупки</label>
-					<input value="<?= $count ?>" name="count" type="number" class="form-control" placeholder="count" aria-label="count">
+					<input value="<?= $_SESSION['cart.count'] ?>" name="count" type="number" class="form-control" placeholder="count" aria-label="count">
 				</div>
 				<div class="col">
 					<label for="exampEmail1" class="form-label">Итого</label>
-					<input value="<?= $result  ?>" name="result" type="number" class="form-control" placeholder="result" aria-label="result">
+					<input value="<?= $_SESSION['cart.sum'] ?>" name="result" type="number" class="form-control" placeholder="result" aria-label="result">
 				</div>
 				<div class="col">
 					<button name="order" class="btn btn-primary" type="submit">Заказать</button>
@@ -83,11 +84,8 @@ include "app/controllers/order.php";
 		</div>
 	</div>
 
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-	<script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>
-	<!-- JavaScript Bundle with Popper -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-	<script src="../../assets/js/script.js"></script>
+    <?php include('app/include/modal+scripts.php'); ?>
+
 
 </body>
 

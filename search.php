@@ -66,6 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search-term'])) {
 
 		</div>
 	</div>
+    <?php include('app/include/modal+scripts.php'); ?>
+
 </body>
 
 </html>
