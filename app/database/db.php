@@ -259,6 +259,8 @@ function SearchProducts($proc,$text) {
 //    return $query->fetch();
 //}
 
+
+//добавление товара в корзину
 function add_to($product) {
     if(isset($_SESSION['cart'][$product['id']])) {
         $_SESSION['cart'][$product['id']]['count_choose'] +=1;
@@ -275,4 +277,29 @@ function add_to($product) {
     }
     $_SESSION['cart.count'] = !empty($_SESSION['cart.count']) ? ++$_SESSION['cart.count'] :1;
     $_SESSION['cart.sum'] = !empty($_SESSION['cart.sum']) ? $_SESSION['cart.sum'] + $product['price'] : $product['price'];
+}
+
+
+
+
+//заказы по датам
+function selectOrdersOnDates($product,$date1, $date2)
+{
+    global $pdo;
+    if ($product != 'All') {
+        $select = "SELECT SUM(product_order.count) as 'count',created from product_order
+JOIN product ON product.id = product_order.id_product
+	WHERE name like '$product' and created between '$date1' and '$date2' 
+	GROUP BY product_order.created";
+    }
+    else {
+        $select = "SELECT SUM(product_order.count) as 'count',created from product_order
+JOIN product ON product.id = product_order.id_product
+	WHERE created between '$date1' and '$date2' 
+	GROUP BY product_order.created";
+    }
+    $query = $pdo->prepare($select);
+    $query->execute();
+    doCheckError($query);
+    return $query->fetchAll();
 }

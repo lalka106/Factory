@@ -1,9 +1,16 @@
 <?php
-include "../../path.php";
-include "../../app/controllers/order.php";
+include_once "../../path.php";
+include SITE_ROOT . "/app/controllers/order.php";
 $orders = selectAll('productcount');
 $products = selectAll('product');
-//tt($products);
+$orders1 = selectAll('product_order');
+$orders_on_dates = selectOrdersOnDates($_POST['product'],$_POST['date1'],$_POST['date2']);
+//tt($orders_on_dates);
+//if (isset($_POST['date'])){
+//
+////    tt($orders_on_dates);
+//}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,26 +31,52 @@ $products = selectAll('product');
 <div class="container">
     <div class="row">
         <?php include("../../app/include/sidebar-admin.php"); ?>
-        <a href="<?= BASE_URL . 'word1.php' ?>"><button type="submit">Ведомость</button></a>
-
-        <div>
-            <canvas id="myChart"></canvas>
-        </div>
-        <div>
-            <canvas id="myChart1"></canvas>
-        </div>
+        <button  type="submit">Ведомость<a href="<?= BASE_URL . 'word1.php' ?>"></a></button>
+       <form method="post" >
+           <button id="btnDisplay" type="button">Display</button>
+           <button id="btnDownload" type="button">Download</button>
+           <button id="btnExcel" type="button">Excel</button>
+       </form>
 
     </div>
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+    <img src="" id="imgConverted">
+
+    <div>
+        <canvas id="myChart1"></canvas>
+    </div>
+    <img src="" id="imgConverted1">
+
+    <div>
+        <form method="post">
+
+            <label for="product">Название товара</label>
+            <input name="product" id="product" type="text">
+            <label for="date1">Дата начала</label>
+            <input name="date1" id="date1" type="date">
+            <label for="date2">Дата начала</label>
+            <input  name="date2"  id="date2" type="date">
+            <button name="date" type="submit">Старт</button>
+        </form>
+
+        <canvas id="myChart2"></canvas>
+
+    </div>
+    <img src="" id="imgConverted2">
+
 </div>
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 <script>
+    const DATA_COUNT = 5;
+    const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
     let arr = new Map([]);
+    let arr_price = new Map([]);
     <?php foreach ($orders as $order) :?>
     arr.set('<?php echo $order['name']?>','<?php echo $order['count'] ?>');
-<?php endforeach; ?>
-    console.log(arr);
+    arr_price.set('<?php echo $order['name']?>','<?php echo $order['result'] ?>');
+    <?php endforeach; ?>
     let labels = [];
     let date = [];
     for (let value of arr.values()) {
@@ -52,20 +85,52 @@ $products = selectAll('product');
     for (let value of arr.keys()) {
         labels.push(value);
     }
+    let date_price = [];
+    for (let value of arr_price.values()) {
+        date_price.push(+value);
+    }
+    // for (let value of arr_price.keys()) {
+    //     labels.push(value);
+    // }
 
     const data = {
         labels: labels,
-        datasets: [{
+        datasets: [
+            {
             label: 'Проданные товары',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'black',
             data: date,
-        }]
+                stack: 'combined',
+                type: 'bar'
+
+        },
+            {
+                label: 'Прибыль',
+                backgroundColor: 'cyan',
+                borderColor: 'black',
+                data: date_price,
+                stack: 'combined',
+
+            }
+        ]
     };
     const config = {
-        type: 'bar',
-        data: data
-        //options: {}
+        type: 'line',
+        data: data,
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Прибыль по проданным товарам'
+                }
+            },
+            scales: {
+                y: {
+                    stacked: true
+                }
+            }
+        },
     };
     const myChart = new Chart(
         document.getElementById('myChart'),
@@ -73,9 +138,7 @@ $products = selectAll('product');
     );
 
     //2
-    const DATA_COUNT = 5;
-    const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
-    let arr1 = new Map([]);
+   let arr1 = new Map([]);
     <?php foreach ($products as $product) :?>
     arr1.set('<?php echo $product['name']?>','<?php echo $product['count'] ?>');
     <?php endforeach; ?>
@@ -113,14 +176,111 @@ $products = selectAll('product');
             }
         },
     };
-
-
-
-
     const myChart1 = new Chart(
         document.getElementById('myChart1'),
         config1
     );
+
+//3
+    let date111= document.querySelector('#date1').value;
+    console.log(date111);
+    let arr2 = new Map([]);
+    let date2 = [];
+
+    const labels2 = []
+    <?php foreach ($orders_on_dates as $order) :?>
+    if (arr2.has('<?php echo $order['created']?>')){
+        labels2.push('<?php echo $order['created']?>');
+        date2.push(<?php echo $order['count']?>);
+    } else arr2.set('<?php echo $order['created']?>','<?php echo $order['count'] ?>');
+    <?php endforeach; ?>
+    console.log(arr2);
+    for (let value of arr2.values()) {
+        date2.push(+value);
+    }
+    for (let value of arr2.keys()) {
+        labels2.push(value);
+    }
+    console.log(date2);
+    console.log(labels2);
+    const data2 = {
+        labels: labels2,
+        datasets: [{
+            label: 'Продано',
+            backgroundColor: 'red',
+            borderColor: 'black',
+            data: date2
+        }]
+    };
+    const config2 = {
+        type: 'line',
+        data: data2,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Проданные товары'
+                }
+            }
+        },
+    };
+    const myChart2 = new Chart(
+        document.getElementById('myChart2'),
+        config2
+    );
+    const btnDisplay = document.querySelector('#btnDisplay');
+    const btnDownload = document.querySelector('#btnDownload');
+    const imgConverted = document.querySelector('#imgConverted');
+    const imgConverted1 = document.querySelector('#imgConverted1');
+    const imgConverted2 = document.querySelector('#imgConverted2');
+    const myCanvas = document.querySelector('#myChart');
+    const myCanvas1 = document.querySelector('#myChart1');
+    const myCanvas2 = document.querySelector('#myChart2');
+    const arrMyCanvas = [myCanvas,myCanvas1,myCanvas2];
+    console.log(arrMyCanvas);
+    btnDisplay.addEventListener("click",function () {
+       const dataURI = myCanvas.toDataURL("");
+       const dataURI1 = myCanvas1.toDataURL("");
+       const dataURI2 = myCanvas2.toDataURL("");
+       imgConverted.src = dataURI;
+       imgConverted1.src = dataURI1;
+       imgConverted2.src = dataURI2;
+    });
+    btnDownload.addEventListener("click",function () {
+        for (let i =0;i<arrMyCanvas.length; i++) {
+            let a = document.createElement("a");
+            document.body.appendChild(a);
+            a.href = arrMyCanvas[i].toDataURL();
+            a.download = "canvas-image" + i + ".png";
+            a.click();
+            document.body.removeChild(a);
+
+
+        }
+
+
+    });
+    const btnExcel = document.querySelector("#btnExcel");
+
+    btnExcel.addEventListener("click",function () {
+        var imgData = myCanvas.toDataURL("");
+        var doc = new jsPDF();
+
+        doc.setFontSize(40);
+        doc.text("Диаграммы", 35, 25);
+        // for (let i =0;i<3;i++) {
+        doc.addImage(imgData, "JPEG", 15, 40, 180, 180);
+        // }
+        doc.save('a4.pdf'); // will save the file in the current working directory
+
+    });
+
+
+
 </script>
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

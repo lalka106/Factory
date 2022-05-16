@@ -1,5 +1,5 @@
 <?php
-include_once("path.php");
+//include_once("path.php");
 
 include_once SITE_ROOT . "/app/database/db.php";
 
@@ -18,7 +18,7 @@ $id_product = '';
 
 // tt($_GET);
 //$product = selectONE('product', ['id' => $_GET['product']]);
-$user = selectONE('users', ['id' => $_SESSION['id']]);
+//$user = selectONE('users', ['id' => $_SESSION['id']]);
 // tt($product);
 
 
@@ -31,10 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order'])) {
         $id_user = trim($_SESSION['id']);
         $count = trim($item['count_choose']);
         if ($count > $item['count']) {
-            array_push($errorMessage, 'Нехватает количества');
+            echo "<script>alert(\"Нехватает количества.\");</script>";
+//            header('location:' . BASE_URL . 'single_product');
             return;
-        } elseif ($count < 0) {
-            array_push($errorMessage, '>0');
+        } elseif ($count == 0) {
+            alert('>0');
             return;
         }
 
@@ -46,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order'])) {
         ];
 //	 tt($order);
         $order = insert('product_order', $order);
-        $order = selectONE('product_order', ['id' => $id]);
+        //$order = selectONE('product_order', ['id' => $id]);
         if (!empty($_SESSION['cart'])) {
             unset($_SESSION['cart']);
             unset($_SESSION['cart.sum']);

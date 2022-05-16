@@ -1,5 +1,5 @@
 <?php
-//include("path.php");
+include("path.php");
 include "app/controllers/order.php";
 //tt($_SESSION);
 
@@ -29,7 +29,7 @@ include "app/controllers/order.php";
             <?php endforeach; ?>
 
             <tr>
-                <td colspan="4" align="right">Товаров: <span id="modal-cart-qty"><?= $_SESSION['cart.count'] ?></span>
+                <td colspan="6" align="right">Товаров: <span id="modal-cart-qty"><?= $_SESSION['cart.count'] ?></span>
                     <br> Сумма: <?= $_SESSION['cart.sum'] ?> руб.
                 </td>
             </tr>

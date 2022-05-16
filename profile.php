@@ -2,7 +2,13 @@
 include("path.php");
 include SITE_ROOT . '/app/database/db.php';
 $orders = selectAll('product_order',['id_user' => $_SESSION['id']]);
-
+if( isset( $_POST['delete'] ) ) {
+    $order = selectONE('product_order',['id' => $_POST['delete']]);
+    $product = selectONE('product',['id'=>$order['id_product']]);
+    delete('product_order',$_POST['delete']);
+    update('product',$order['id_product'],['count' => $product['count'] + $order['count']]);
+    header("Refresh: 1");
+}
 //include 'word.php';
 ?>
 
@@ -57,8 +63,9 @@ $orders = selectAll('product_order',['id_user' => $_SESSION['id']]);
             <?php if ($order['id_status'] == 1) : ?>
                 <td style="color: brown"><?=$status['name']?></td>
             <?php endif;?>
-
-            <td style="color: red">Отменить</td>
+    <form action="profile.php" method="post">
+            <td style="color: red"><button name="delete" type="submit" value="<?= $order['id']?>">Отменить</button> </td>
+    </form>
         </tr>
     <?php endforeach; ?>
 

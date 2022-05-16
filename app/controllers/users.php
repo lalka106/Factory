@@ -37,7 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-reg'])) {
 		array_push($errorMessage, 'Логин должен быть более 2-ух символов');
 	} elseif ($pass1 !== $pass2) {
 		array_push($errorMessage, 'Пароли должны совпадать');
-	} else {
+	} elseif (!preg_match("/^[a-zа-яё\d]*$/iu", $login)) {
+        array_push($errorMessage, 'Некорректный логин');
+    } elseif (!preg_match("/^[a-zа-яё\s]*$/iu", $fio)) {
+        array_push($errorMessage, 'Некорректное ФИО');
+
+    } else {
 		$existence = selectONE('users', ['email' => $email]);
 		if (!empty($existence['email']) && $existence['email'] === $email) {
 			array_push($errorMessage, 'Пользователь с такой почтой уже зарегистрирован');
@@ -58,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-reg'])) {
 } else {
 	$login = '';
 	$email = '';
+    $fio = '';
 }
 
 
