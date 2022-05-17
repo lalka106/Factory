@@ -35,7 +35,8 @@ $orders_on_dates = selectOrdersOnDates($_POST['product'],$_POST['date1'],$_POST[
        <form method="post" >
            <button id="btnDisplay" type="button">Display</button>
            <button id="btnDownload" type="button">Download</button>
-           <button id="btnExcel" type="button">Excel</button>
+           <a href="pdf.php"><button id="btnExcel" type="button">PDF</button></a>
+           <a href="phpword.php"><button id="btnExcel" type="button">Word</button></a>
        </form>
 
     </div>
@@ -67,6 +68,7 @@ $orders_on_dates = selectOrdersOnDates($_POST['product'],$_POST['date1'],$_POST[
     <img src="" id="imgConverted2">
 
 </div>
+<script type="module" src="../../assets/js/excel.mjs" ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 <script>
     const DATA_COUNT = 5;
@@ -264,20 +266,21 @@ $orders_on_dates = selectOrdersOnDates($_POST['product'],$_POST['date1'],$_POST[
 
 
     });
-    const btnExcel = document.querySelector("#btnExcel");
-
-    btnExcel.addEventListener("click",function () {
-        var imgData = myCanvas.toDataURL("");
-        var doc = new jsPDF();
-
-        doc.setFontSize(40);
-        doc.text("Диаграммы", 35, 25);
-        // for (let i =0;i<3;i++) {
-        doc.addImage(imgData, "JPEG", 15, 40, 180, 180);
-        // }
-        doc.save('a4.pdf'); // will save the file in the current working directory
-
-    });
+    // const btnExcel = document.querySelector("#btnExcel");
+    //
+    // btnExcel.addEventListener("click",function () {
+    //     let imgData = myCanvas.toDataURL();
+    //     console.log(imgData);
+    //     let doc = new jsPDF();
+    //
+    //     doc.setFontSize(40);
+    //     doc.text("Диаграммы", 35, 25);
+    //     // for (let i =0;i<3;i++) {
+    //     doc.addImage(imgData, "JPEG", 15, 40, 180, 180);
+    //     // }
+    //     doc.save('a4.pdf'); // will save the file in the current working directory
+    //
+    // });
 
 
 

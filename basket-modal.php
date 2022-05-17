@@ -1,5 +1,5 @@
 <?php
-include("path.php");
+include_once("path.php");
 include "app/controllers/order.php";
 //tt($_SESSION);
 
