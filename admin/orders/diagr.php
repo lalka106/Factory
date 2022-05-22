@@ -31,7 +31,7 @@ $orders_on_dates = selectOrdersOnDates($_POST['product'],$_POST['date1'],$_POST[
 <div class="container">
     <div class="row">
         <?php include("../../app/include/sidebar-admin.php"); ?>
-        <button  type="submit">Ведомость<a href="<?= BASE_URL . 'word1.php' ?>"></a></button>
+        <a href="<?= BASE_URL . 'word1.php' ?>"><button  type="submit">Ведомость</button></a>
        <form method="post" >
            <button id="btnDisplay" type="button">Display</button>
            <button id="btnDownload" type="button">Download</button>
