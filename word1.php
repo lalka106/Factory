@@ -22,7 +22,7 @@ $textStyle = array(
     'align'=>'center'
 );
 $section = $phpWord->addSection();
-$section->addText('Ведомость наличия товаров',array('bold'=>true));
+$section->addText('Ведомость наличия товаров',array('bold'=>true,'align'=>'center'));
 $firstRowStyle = array('bgColor' => '66BBFF');
 $phpWord->addTableStyle('Ostatki', $tableStyle, $firstRowStyle);
 $table = $section->addTable('Ostatki');
@@ -42,7 +42,6 @@ for ($i=0;$i<count($products);$i++){
 //    $section = $document->cloneRowAndSetValues("name",$name);
 
 }
-$section = $phpWord->addSection();
 
 $section->addText('Должность - ');
 $section->addText('Подпись - ');

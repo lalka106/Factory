@@ -31,8 +31,9 @@ $orders_on_dates = selectOrdersOnDates($_POST['product'],$_POST['date1'],$_POST[
 <div class="container">
     <div class="row">
         <?php include("../../app/include/sidebar-admin.php"); ?>
-        <a href="<?= BASE_URL . 'word1.php' ?>"><button  type="submit">Ведомость</button></a>
        <form method="post" >
+           <a href="<?= BASE_URL . 'word1.php' ?>"><button  type="button">Ведомость</button></a>
+
            <button id="btnDisplay" type="button">Display</button>
            <button id="btnDownload" type="button">Download</button>
            <a href="pdf.php"><button id="btnExcel" type="button">PDF</button></a>
@@ -40,17 +41,20 @@ $orders_on_dates = selectOrdersOnDates($_POST['product'],$_POST['date1'],$_POST[
        </form>
 
     </div>
-    <div>
+    <div class="row">
+        <div class="col-4">
         <canvas id="myChart"></canvas>
-    </div>
-    <img src="" id="imgConverted">
+            <img src="" id="imgConverted">
 
-    <div>
+        </div>
+
+    <div class="col-4">
         <canvas id="myChart1"></canvas>
-    </div>
-    <img src="" id="imgConverted1">
+        <img src="" id="imgConverted1">
 
-    <div>
+    </div>
+
+    <div class="col-4">
         <form method="post">
 
             <label for="product">Название товара</label>
@@ -63,10 +67,10 @@ $orders_on_dates = selectOrdersOnDates($_POST['product'],$_POST['date1'],$_POST[
         </form>
 
         <canvas id="myChart2"></canvas>
+        <img src="" id="imgConverted2">
 
     </div>
-    <img src="" id="imgConverted2">
-
+    </div>
 </div>
 <script type="module" src="../../assets/js/excel.mjs" ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
