@@ -1,11 +1,11 @@
-<header class="container-fluid">
+<header class="header">
 	<div class="container">
 		<div class="row">
 			<div class="col-2">
 				<h1>Завод СВТ</h1>
 			</div>
 			<nav class="col-8">
-				<ul>
+				<ul class="1">
 					<li><a href="<?php echo BASE_URL . "index.php" ?>">Главная</a></li>
 					<li><a href="#">О компании</a>
 						<ul>
@@ -25,9 +25,9 @@
 								<?php if ($_SESSION['admin']) : ?>
 									<li><a href="<?php echo BASE_URL . "admin/posts/index.php" ?>">Админ панель</a></li>
 								<?php endif; ?>
-                                <li><a href="<?php echo BASE_URL . "profile.php" ?>">Профиль</a></li>
+								<li><a href="<?php echo BASE_URL . "profile.php" ?>">Профиль</a></li>
 
-                                <li><a href="<?php echo BASE_URL . "logout.php" ?>">Выход</a></li>
+								<li><a href="<?php echo BASE_URL . "logout.php" ?>">Выход</a></li>
 							</ul>
 
 						<?php else : ?>
@@ -40,20 +40,22 @@
 							</ul>
 						<?php endif; ?>
 					</li>
+					<li class="col-2">
+
+						<button id="get-cart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#cart-modal">
+							Корзина <span class="badge badge-light mini-cart-qty"><?= $_SESSION['cart.count'] ?? 0 ?></span>
+						</button>
+
+					</li>
 
 				</ul>
+
 			</nav>
-            <div class="col-2">
-
-                    <button id="get-cart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#cart-modal">
-                        Корзина <span class="badge badge-light mini-cart-qty"><?= $_SESSION['cart.count'] ?? 0 ?></span>
-                    </button>
-
-            </div>
 
 			<div class="header__burger">
 				<span></span>
 			</div>
+
 		</div>
 	</div>
 

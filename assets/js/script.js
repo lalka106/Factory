@@ -12,3 +12,13 @@ ClassicEditor
 	.catch(error => {
 		console.log(error);
 	});
+
+
+$(document).ready(function () {
+	$('.header__burger').click(function (event) {
+		$('.header__burger, .1').toggleClass('active1');
+		$(' .carousel.slide').toggleClass('vis');
+		$('body').toggleClass('lock');
+	});
+
+});
