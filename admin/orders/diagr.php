@@ -4,7 +4,7 @@ include SITE_ROOT . "/app/controllers/order.php";
 $orders = selectAll('productcount');
 $products = selectAll('product');
 $orders1 = selectAll('product_order');
-$orders_on_dates = selectOrdersOnDates($_POST['product'],$_POST['date1'],$_POST['date2']);
+$orders_on_dates = selectOrdersOnDates($_POST['product'], $_POST['date1'], $_POST['date2']);
 //tt($orders_on_dates);
 //if (isset($_POST['date'])){
 //
@@ -161,7 +161,7 @@ $orders_on_dates = selectOrdersOnDates($_POST['product'],$_POST['date1'],$_POST[
         labels: labels1,
         datasets: [{
             label: 'Товаров в наличии',
-            backgroundColor: 'red',
+            backgroundColor: ['red','green','blue','yellow','pink','brown','black','white'],
             borderColor: 'black',
             data: date1,
         }]
