@@ -19,7 +19,7 @@ include "../../app/controllers/posts.php";
 <body>
 	<?php include("../../app/include/header_admin.php"); ?>
 
-	<div class="container-fluid">
+	<div class="container">
 		<div class="row">
 			<?php include("../../app/include/sidebar-admin.php"); ?>
 

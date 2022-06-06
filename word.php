@@ -6,6 +6,7 @@ require_once "vendor/autoload.php";
 $order = selectONE('product_order',['id'=> $_GET['id_product']]);
 $user = selectONE('users',['id'=>$order['id_user']]);
 $product = selectONE('product',['id'=>$order['id_product']]);
+$type = selectONE('type_product',['id'=>$product['id_type_product']]);
 //tt($user);
 $document = new \PhpOffice\PhpWord\TemplateProcessor('./111.docx');
 
@@ -19,6 +20,7 @@ $m = date("m");
 $y = date("Y");
 $id = $order['id'];
 $name = $product['name'];
+$type = $type['name'];
 $count = $order['count'];
 $result = $order['result'];
 
@@ -26,6 +28,7 @@ $document->setValue("fio",$fio);
 $document->setValue("id",$id);
 $document->setValue("count",$count);
 $document->setValue("name",$name);
+$document->setValue("type",$type);
 $document->setValue("result",$result);
 //$document->setValue("date",$date);
 $document->setValue("d",$d);

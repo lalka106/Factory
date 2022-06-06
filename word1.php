@@ -4,6 +4,7 @@ include SITE_ROOT . '/app/database/db.php';
 require_once "vendor/autoload.php";
 
 $products = selectAll('product');
+
 $phpWord = new \PhpOffice\PhpWord\PhpWord();
 $document = new \PhpOffice\PhpWord\TemplateProcessor('./ostatki.docx');
 $uploadDir = __DIR__;
@@ -36,49 +37,39 @@ $phpWord->addTableStyle('Ostatki', $tableStyle, $firstRowStyle);
 $table = $section->addTable('Ostatki');
 $table->addRow(500);
 $table->addCell(3000,$cellStyle)->addText('Наименование товара',$textStyle);
-$table->addCell(500,$cellStyle)->addText('Код товара',$textStyle);
-$table->addCell(500,$cellStyle)->addText('Количество на складе, шт.',$textStyle);
-$table->addCell(3000,$cellStyle)->addText('Учетная стоимость, руб. коп.',$textStyle);
+$table->addCell(700,$cellStyle)->addText('Категория товара',$textStyle);
+$table->addCell(700,$cellStyle)->addText('Количество на складе, шт.',$textStyle);
+$table->addCell(2000,$cellStyle)->addText('Учетная стоимость за шт., руб. коп.',$textStyle);
+$table->addCell(1000,$cellStyle)->addText('Итоговая стоимость, руб. коп.',$textStyle);
 for ($i=0;$i<count($products);$i++){
-    $table->addRow(500);
+    $type = selectONE('type_product',['id'=>$products[$i]['id_type_product']]);
+    $table->addRow(700);
     $name = $products[$i]['name'];
-    $id = $products[$i]['id'];
+    $type = $type['name'];
     $count = $products[$i]['count'];
     $price = $products[$i]['price'];
     $cell = $table->addCell(3000,$cellStyle);
     $cell->addText($name);
-    $cell = $table->addCell(500,$cellStyle);
-    $cell->addText($id);
-    $cell = $table->addCell(500,$cellStyle);
+    $cell = $table->addCell(700,$cellStyle);
+    $cell->addText($type);
+    $cell = $table->addCell(700,$cellStyle);
     $cell->addText($count);
-    $cell = $table->addCell(3000,$cellStyle);
+    $cell = $table->addCell(2000,$cellStyle);
     $cell->addText($price);
-
-//    $document->setValue("name",$name);
-//    $document->setValue("count",$count);
-//    $section = $document->cloneRowAndSetValues("name",$name);
+    $cell = $table->addCell(1000, $cellStyle);
+    $cell->addText($price*$count);
 
 }
 
 $table->addRow(500);
 $table->addCell(3000)->addText('Должность_________________',$textStyle);
-$table->addCell(3000)->addText();
-$table->addCell(3000)->addText();
-$table->addCell(3000)->addText('Подпись___________________',$textStyle);
+$table->addCell(700)->addText();
+$table->addCell(700)->addText();
+$table->addCell(2000)->addText();
+$table->addCell(1000)->addText('Подпись___________________',$textStyle);
 
-
-
-//$document->saveAs($outputFile);
 
 header("Content-Type: application/octet-stream");
 header("Content-Disposition: attachment; filename=ostatki.docx");
 $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord,"Word2007");
 $objWriter->save("php://output");
-
-//$downloadFile = $outputFile;
-//header("Content-Type: application/octet-stream");
-//header("Accept-Ranges: bytes");
-//header("Content-Length: " .filesize($downloadFile));
-//header("Content-Disposition: attachment; filename=".$downloadFile);
-//readfile($downloadFile);
-////header('location:' . BASE_URL . 'profile.php');
