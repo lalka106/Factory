@@ -32,12 +32,11 @@ $orders_on_dates = selectOrdersOnDates($_POST['product'], $_POST['date1'], $_POS
     <div class="row">
         <?php include("../../app/include/sidebar-admin.php"); ?>
        <form method="post" >
-           <a href="<?= BASE_URL . 'word1.php' ?>"><button  type="button">Ведомость</button></a>
 
-           <button id="btnDisplay" type="button">Display</button>
-           <button id="btnDownload" type="button">Download</button>
-           <a href="pdf.php"><button id="btnExcel" type="button">PDF</button></a>
-           <a href="phpword.php"><button id="btnExcel" type="button">Word</button></a>
+           <button class="btn btn-warning" id="btnDisplay" type="button">Display</button>
+           <button class="btn btn-warning" id="btnDownload" type="button">Download</button>
+           <a class="btn btn-warning" href="pdf.php">PDF</a>
+           <a class="btn btn-warning" href="phpword.php">Word</a>
        </form>
 
     </div>

@@ -7,7 +7,7 @@
 			<nav class="col-8">
 				<ul>
                     <li style="text-align: center" >
-                        <a style="text-align: center" href="<?php echo BASE_URL . "spravka_admin.php" ?>"><h6>Справка<i style="text-align: center" class="fa fa-question" aria-hidden="true"></i></h6></a>
+                        <a style="text-align: center" href="<?php echo BASE_URL . "spravka_admin.php" ?>"><h4>Справка</h4></a>
                     </li>
 					<li>
 						<a href="<?php echo BASE_URL . "admin/posts/index.php" ?>">

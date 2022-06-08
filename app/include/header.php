@@ -57,7 +57,7 @@
 
                     </li>
                     <li style="text-align: center" class="col-1">
-                        <a style="text-align: center" href="spravka.php"><h6>Справка<i style="text-align: center" class="fa fa-question" aria-hidden="true"></i></h6></a>
+                        <a style="text-align: center" href="spravka.php"><h4>Справка</h4></a>
                     </li>
 
                 </ul>

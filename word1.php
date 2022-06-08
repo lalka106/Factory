@@ -6,7 +6,7 @@ require_once "vendor/autoload.php";
 $products = selectAll('product');
 
 $phpWord = new \PhpOffice\PhpWord\PhpWord();
-$document = new \PhpOffice\PhpWord\TemplateProcessor('./ostatki.docx');
+//$document = new \PhpOffice\PhpWord\TemplateProcessor('./ostatki.docx');
 $uploadDir = __DIR__;
 $outputFile = "ostatkiItog.docx";
 $tableStyle = array(
@@ -33,7 +33,7 @@ $cell = $table->addCell(3000,$cellStyle);
 $cell->addText(date("j.n.Y"));
 $section->addText('Ведомость наличия товаров',array('bold'=>true,'align'=>'center'));
 $firstRowStyle = array('bgColor' => '66BBFF','bold'=>true);
-$phpWord->addTableStyle('Ostatki', $tableStyle, $firstRowStyle);
+$phpWord->addTableStyle('Ostatki', $tableStyle);
 $table = $section->addTable('Ostatki');
 $table->addRow(500);
 $table->addCell(3000,$cellStyle)->addText('Наименование товара',$textStyle);
@@ -62,11 +62,11 @@ for ($i=0;$i<count($products);$i++){
 }
 
 $table->addRow(500);
-$table->addCell(3000)->addText('Должность_________________',$textStyle);
+$table->addCell(3000)->addText('Должность______________',$textStyle);
 $table->addCell(700)->addText();
 $table->addCell(700)->addText();
 $table->addCell(2000)->addText();
-$table->addCell(1000)->addText('Подпись___________________',$textStyle);
+$table->addCell(1000)->addText('Подпись________________',$textStyle);
 
 
 header("Content-Type: application/octet-stream");

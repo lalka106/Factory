@@ -28,8 +28,10 @@ include "../../app/controllers/products.php";
 					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/products/created.php" ?>">Add Post</a>
 					<span class="col-1"></span>
 					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/products/index.php" ?>">Manage Posts</a>
-				</div>
-				<div class="row title-table">
+                </div>
+                <a  style="margin: 5px 0 0 0" class="btn btn-warning" href="<?= BASE_URL . 'word1.php' ?>">Ведомость</a>
+
+                <div class="row title-table">
 					<h2>Управление товарами</h2>
 					<div class=" col-1">ID</div>
 					<div class=" col-2">TITLE</div>
