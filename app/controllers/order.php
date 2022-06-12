@@ -31,8 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order'])) {
         $id_user = trim($_SESSION['id']);
         $count = trim($item['count_choose']);
         if ($count > $item['count']) {
-            echo "<script>alert(\"Нехватает количества.\");</script>";
-//            header('location:' . BASE_URL . 'single_product');
+            echo "<script>alert(\"Не хватает количества\");</script>";
+            sleep(3);
+            header('location:' . BASE_URL . 'catalog.php');
             return;
         } elseif ($count == 0) {
             alert('>0');

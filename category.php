@@ -52,7 +52,7 @@ $category = selectONE('categories', ['id' => $_GET['id']]);
 					<?php endforeach; ?>
 				<?php endif; ?>
 			</div>
-			<?php include("app/include/sidebar_catalog.php"); ?>
+<!--			--><?php //include("app/include/sidebar_catalog.php"); ?>
 
 		</div>
 	</div>

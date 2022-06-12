@@ -58,7 +58,7 @@ $dealers = selectAllDirectorsForDealers('dealers', 'directors');
 					</div>
 				<?php endforeach; ?>
 			</div>
-			<?php include("app/include/sidebar_catalog.php"); ?>
+<!--			--><?php //include("app/include/sidebar_catalog.php"); ?>
 
 		</div>
 	</div>

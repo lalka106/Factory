@@ -13,7 +13,8 @@ if(isset($_GET['cart'])) {
                 echo json_encode(['code'=>'error','answer'=>'Требуется авторизация']);
 //                header('location:' . BASE_URL . 'aut.php');
 
-            } else {
+            }
+            else {
                 add_to($product);
                 ob_start();
                 require __DIR__ . '/basket-modal.php';

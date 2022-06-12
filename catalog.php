@@ -31,7 +31,7 @@ $types = selectAll('type_catalog');
 					<h2 class="main__title">Уважаемые клиенты!
 					</h2>
 				</div> -->
-				<?php include("app/include/sidebar_catalog.php"); ?>
+<!--				--><?php //include("app/include/sidebar_catalog.php"); ?>
 
 				<div class="catalog col">
 					<div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-3">

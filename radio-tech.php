@@ -32,7 +32,7 @@ $type_product = selectAll('type_product', ['id_type_catalog' => $type['id']]);
 					<h2 class="main__title">Уважаемые клиенты!
 					</h2>
 				</div> -->
-				<?php include("app/include/sidebar_catalog.php"); ?>
+<!--				--><?php //include("app/include/sidebar_catalog.php"); ?>
 
 				<div class="catalog col">
 					<div class="info">

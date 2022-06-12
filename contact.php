@@ -29,7 +29,7 @@ $posts = selectAll('posts', ['status' => 1]);
 					<h2 class="main__title">Уважаемые клиенты!
 					</h2>
 				</div> -->
-				<?php include("app/include/sidebar_catalog.php"); ?>
+<!--				--><?php //include("app/include/sidebar_catalog.php"); ?>
 
 
 				<div class="contact col">

@@ -25,9 +25,9 @@ include "../../app/controllers/products.php";
 
 			<div class="posts col-9">
 				<div class="button row">
-					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/products/created.php" ?>">Add Post</a>
+					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/products/created.php" ?>">Add product</a>
 					<span class="col-1"></span>
-					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/products/index.php" ?>">Manage Posts</a>
+					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/products/index.php" ?>">Manage products</a>
                 </div>
                 <a  style="margin: 5px 0 0 0" class="btn btn-warning" href="<?= BASE_URL . 'word1.php' ?>">Ведомость</a>
 
