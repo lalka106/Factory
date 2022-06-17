@@ -1,7 +1,7 @@
 <?php
 // session_start();
 include "../../path.php";
-include SITE_ROOT . "/app/controllers/types_catalog.php";
+include SITE_ROOT . "/app/controllers/categories_to_catalog.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,17 +25,17 @@ include SITE_ROOT . "/app/controllers/types_catalog.php";
 
 			<div class="posts col-9">
 				<div class="button row">
-					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/type_catalog/created.php" ?>">Add category</a>
+					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/type_product/created.php" ?>">Add category</a>
 					<span class="col-1"></span>
-					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/type_catalog/index.php" ?>">Manage categories</a>
+					<a class="col-3 btn btn-success" href="<?php echo BASE_URL . "admin/type_product/index.php" ?>">Manage categories</a>
 				</div>
 				<div class="row title-table">
-					<h2>Управление каталогом</h2>
+					<h2>Управление категориями</h2>
 					<div class=" col-1">ID</div>
 					<div class=" col-4">TITLE</div>
 					<div class=" col-4">Manage</div>
 				</div>
-				<?php foreach ($types as $key => $type) : ?>
+				<?php foreach ($types_product as $key => $type) : ?>
 					<div class="row post">
 						<div class="id col-1"><?= $key + 1; ?></div>
 						<div class="title col-4"><?= $type['name']; ?></div>

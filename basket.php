@@ -12,8 +12,11 @@ if(isset($_GET['cart'])) {
             if(!$product) {
                 echo json_encode(['code'=>'error','answer'=>'Требуется авторизация']);
 //                header('location:' . BASE_URL . 'aut.php');
-
             }
+//            if($_SESSION['count_choose'] > $product['count']) {
+//                echo json_encode(['code'=>'error','answer'=>'Не хватает количества']);
+//
+//            }
             else {
                 add_to($product);
                 ob_start();

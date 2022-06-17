@@ -32,13 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order'])) {
         $count = trim($item['count_choose']);
         if ($count > $item['count']) {
             echo "<script>alert(\"Не хватает количества\");</script>";
-            sleep(3);
-            header('location:' . BASE_URL . 'catalog.php');
-            return;
-        } elseif ($count == 0) {
-            alert('>0');
-            return;
+//            sleep(3);
+//            header('location:' . BASE_URL . 'catalog.php');
+            break;
         }
+//    elseif ($count == 0) {
+//            alert('>0');
+//            return;
+//        }
 
         $order = [
             'id_product' => $id_product,

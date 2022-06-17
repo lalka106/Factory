@@ -1,6 +1,8 @@
 <?php
 include "../../path.php";
 include "../../app/controllers/dealers.php";
+$dealer = selectONE('dealers',['id'=>$_GET['id']]);
+$director_selected = selectONE('directors',['id'=>$dealer['id_director']]);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,7 +59,8 @@ include "../../app/controllers/dealers.php";
 						<label for="">Директор</label>
 
 						<select name="director" class="form-select mb-4" aria-label="Default select example">
-							<?php foreach ($directors as $key => $director) : ?>
+                            <option selected value="<?= $director_selected['id'] ?>"><?= $director_selected['surname'] . ' ' . $director_selected['name'] . ' ' . $director_selected['patronymic']  ?></option>
+                            <?php foreach ($directors as $key => $director) : ?>
 								<option value="<?= $director['id'] ?>"><?= $director['surname'] . ' ' . $director['name'] . ' ' . $director['patronymic']  ?></option>
 							<?php endforeach; ?>
 						</select>

@@ -160,7 +160,7 @@ $orders_on_dates = selectOrdersOnDates($_POST['product'], $_POST['date1'], $_POS
         labels: labels1,
         datasets: [{
             label: 'Товаров в наличии',
-            backgroundColor: ['red','green','blue','yellow','pink','brown','black','white'],
+            backgroundColor: ['red','green','blue','yellow','pink','brown','black','white','cyan','purple','orange','magenta','coral','grey','golden','khaki','pea'],
             borderColor: 'black',
             data: date1,
         }]
