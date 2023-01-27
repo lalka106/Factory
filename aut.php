@@ -15,7 +15,7 @@ include("app/controllers/users.php"); ?>
 	<link rel="stylesheet" href="css/style.css">
 	<title>Главная</title>
 </head>
-
+<!--сделано-->
 <body>
 	<?php include("app/include/header.php"); ?>
 	<div class="container reg_form">
